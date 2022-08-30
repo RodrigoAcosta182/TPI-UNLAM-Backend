@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "TIP-UNLAM-Backend.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/TIP-UNLAM-Backend.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TIP-UNLAM-Backend.Data.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "TIP-UNLAM-Backend.Data/1.0.0": {
+      "type": "project",
+      "path": "../TIP-UNLAM-Backend.Data/TIP-UNLAM-Backend.Data.csproj",
+      "msbuildProject": "../TIP-UNLAM-Backend.Data/TIP-UNLAM-Backend.Data.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "TIP-UNLAM-Backend.Data >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\UNLAM\\.nuget\\packages\\": {},
@@ -43,7 +62,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\TPI UNLAM\\Backend\\TIP-UNLAM-Backend.Data\\TIP-UNLAM-Backend.Data.csproj": {
+              "projectPath": "C:\\TPI UNLAM\\Backend\\TIP-UNLAM-Backend.Data\\TIP-UNLAM-Backend.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
