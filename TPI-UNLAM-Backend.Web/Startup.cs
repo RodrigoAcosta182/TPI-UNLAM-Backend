@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TPI_UNLAM_Backend.Servicios;
+using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend
 {
@@ -28,6 +30,7 @@ namespace TPI_UNLAM_Backend
         {
 
             services.AddControllers();
+            services.AddScoped<ILoginServicio, LoginServicio>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });

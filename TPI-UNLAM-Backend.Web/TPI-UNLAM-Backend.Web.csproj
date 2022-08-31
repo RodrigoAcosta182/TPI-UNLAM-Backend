@@ -20,8 +20,4 @@
     <ProjectReference Include="..\TPI-UNLAM-Backend.Servicios\TPI-UNLAM-Backend.Servicios.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\v1\" />
-  </ItemGroup>
-
 </Project>
