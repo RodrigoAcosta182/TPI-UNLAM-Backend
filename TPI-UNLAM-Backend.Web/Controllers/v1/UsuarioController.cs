@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
-namespace TPI_UNLAM_Backend.Controllers
+namespace TPI_UNLAM_Backend.Controllers.v1
 {
     public class UsuarioController : Controller
     {

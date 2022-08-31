@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data.EF;
+using TIP_UNLAM_Backend.Data.Repositorios;
+using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
@@ -30,6 +33,9 @@ namespace TPI_UNLAM_Backend
         {
 
             services.AddControllers();
+            services.AddTransient<TPI_UNLAM_DBContext>();
+            services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<ILoginServicio, LoginServicio>();
             services.AddSwaggerGen(c =>
             {
