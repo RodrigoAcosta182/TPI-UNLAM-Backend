@@ -10,5 +10,9 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
     public interface IUsuarioRepositorio
     {
         public Usuario GetUsuarioById(int idUsuario);
+        public void GuardarUsuario(Usuario usuario);
+        public bool GetUsuarioByMailExistente(Usuario user);
+        public void SaveChanges();
+
     }
 }

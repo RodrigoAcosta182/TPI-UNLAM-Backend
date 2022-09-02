@@ -22,5 +22,22 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             return _ctx.Usuarios.Find(idUsuario);
         }
 
+        public void GuardarUsuario(Usuario usuario)
+        {
+            _ctx.Usuarios.Add(usuario);
+        }
+
+        public bool GetUsuarioByMailExistente(Usuario user)
+        {
+            if (_ctx.Usuarios.Where(x => x.Dni == user.Dni) != null)
+                return true;
+            
+            return false;
+        }
+
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
+        }
     }
 }

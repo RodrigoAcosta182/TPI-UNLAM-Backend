@@ -36,7 +36,6 @@ namespace TPI_UNLAM_Backend
             services.AddTransient<TPI_UNLAM_DBContext>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddScoped<ILoginServicio, LoginServicio>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });

@@ -10,5 +10,8 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     public interface IUsuarioServicio
     {
         public Usuario GetUsuarioById(int idUsuario);
+        public void GuardarUsuario(Usuario usuario);
+        public bool GetUsuarioByMail(Usuario user);
+        public void SaveChanges();
     }
 }

@@ -22,5 +22,19 @@ namespace TPI_UNLAM_Backend.Servicios
         {
            return _usuarioRepo.GetUsuarioById(idUsuario);
         }
+
+        public void GuardarUsuario(Usuario usuario)
+        {
+            if (_usuarioRepo.GetUsuarioByMailExistente(usuario) == true)
+                throw new Exception("El usuario ya existe");
+
+            _usuarioRepo.GuardarUsuario(usuario);
+            _usuarioRepo.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
+            _usuarioRepo.SaveChanges();
+        }
     }
 }
