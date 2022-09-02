@@ -8,19 +8,18 @@ using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 
 namespace TIP_UNLAM_Backend.Data.Repositorios
 {
-    public class UsuarioRepositorio : IUsuarioRepositorio
+    public class JuegoRepositorio : IJuegoRepositorio
     {
         private TPI_UNLAM_DBContext _ctx;
 
-        public UsuarioRepositorio(TPI_UNLAM_DBContext ctx)
+        public JuegoRepositorio(TPI_UNLAM_DBContext ctx)
         {
-            _ctx = ctx;                
+            _ctx = ctx;
         }
 
-        //public Usuario GetUsuarioById(int idUsuario)
-        //{
-        //    return _ctx.Usuarios.Find(idUsuario);
-        //}
-
+        public List<Juego> getAllJuegos()
+        {
+            return _ctx.Juegos.OrderBy(x => x.Codigo).ToList();
+        }
     }
 }

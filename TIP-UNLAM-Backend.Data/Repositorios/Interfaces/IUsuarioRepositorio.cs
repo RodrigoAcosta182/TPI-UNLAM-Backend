@@ -9,6 +9,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
 {
     public interface IUsuarioRepositorio
     {
-        public Usuario GetUsuarioById(int idUsuario);
+        //public Usuario GetUsuarioById(int idUsuario);
     }
 }

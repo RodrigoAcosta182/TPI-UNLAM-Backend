@@ -11,16 +11,16 @@ namespace TPI_UNLAM_Backend.Servicios
 {
     public class UsuarioServicio : IUsuarioServicio
     {
-        private IUsuarioRepositorio _usuarioRepo;
+        //private IUsuarioRepositorio _usuarioRepo;
 
-        public UsuarioServicio(IUsuarioRepositorio usuarioRepo)
-        {
-            _usuarioRepo = usuarioRepo;
-        }
+        //public UsuarioServicio(IUsuarioRepositorio usuarioRepo)
+        //{
+        //    _usuarioRepo = usuarioRepo;
+        //}
 
-        public Usuario GetUsuarioById(int idUsuario)
-        {
-           return _usuarioRepo.GetUsuarioById(idUsuario);
-        }
+        //public Usuario GetUsuarioById(int idUsuario)
+        //{
+        //   return _usuarioRepo.GetUsuarioById(idUsuario);
+        //}
     }
 }

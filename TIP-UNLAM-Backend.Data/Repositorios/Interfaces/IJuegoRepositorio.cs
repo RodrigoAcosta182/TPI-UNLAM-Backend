@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.EF;
 
-namespace TPI_UNLAM_Backend.Servicios.Interfaces
+namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
 {
-    public interface IUsuarioServicio
+    public interface IJuegoRepositorio
     {
-        //public Usuario GetUsuarioById(int idUsuario);
+        public List<Juego> getAllJuegos();
     }
 }

@@ -17,15 +17,19 @@ namespace TIP_UNLAM_Backend.Data.EF
         {
         }
 
-        public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<UsuarioXusuario> UsuarioXusuarios { get; set; }
+        public virtual DbSet<Juego> Juegos { get; set; }
+        public virtual DbSet<Paciente> Pacientes { get; set; }
+        public virtual DbSet<Paise> Paises { get; set; }
+        public virtual DbSet<Profesionale> Profesionales { get; set; }
+        public virtual DbSet<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
+        public virtual DbSet<Provincia> Provincias { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -33,9 +37,37 @@ namespace TIP_UNLAM_Backend.Data.EF
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
-            modelBuilder.Entity<Usuario>(entity =>
+            modelBuilder.Entity<Juego>(entity =>
+            {
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ruta)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Paciente>(entity =>
             {
                 entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Contrasena)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Direccion)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -47,35 +79,139 @@ namespace TIP_UNLAM_Backend.Data.EF
 
                 entity.Property(e => e.FechaAlta).HasColumnType("datetime");
 
-                entity.Property(e => e.FechaNacimiento).HasColumnType("date");
+                entity.Property(e => e.FechaNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Mail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Pais)
+                    .WithMany(p => p.Pacientes)
+                    .HasForeignKey(d => d.PaisId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pacientes_Paises");
+
+                entity.HasOne(d => d.Provincia)
+                    .WithMany(p => p.Pacientes)
+                    .HasForeignKey(d => d.ProvinciaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pacientes_Provincias");
             });
 
-            modelBuilder.Entity<UsuarioXusuario>(entity =>
+            modelBuilder.Entity<Paise>(entity =>
             {
-                entity.ToTable("UsuarioXusuario");
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.FechaVinculacion).HasColumnType("datetime");
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
 
-                entity.Property(e => e.UsuarioId1).HasColumnName("usuarioId_1");
+            modelBuilder.Entity<Profesionale>(entity =>
+            {
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UsuarioId2).HasColumnName("usuarioId_2");
+                entity.Property(e => e.Contrasena)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.UsuarioId1Navigation)
-                    .WithMany(p => p.UsuarioXusuarioUsuarioId1Navigations)
-                    .HasForeignKey(d => d.UsuarioId1)
+                entity.Property(e => e.Direccion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dni)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaAlta).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Legajo)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Mail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Pais)
+                    .WithMany(p => p.Profesionales)
+                    .HasForeignKey(d => d.PaisId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Table_1_Usuarios1");
+                    .HasConstraintName("FK_Profesionales_Paises");
 
-                entity.HasOne(d => d.UsuarioId2Navigation)
-                    .WithMany(p => p.UsuarioXusuarioUsuarioId2Navigations)
-                    .HasForeignKey(d => d.UsuarioId2)
+                entity.HasOne(d => d.Provincia)
+                    .WithMany(p => p.Profesionales)
+                    .HasForeignKey(d => d.ProvinciaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Table_1_Usuarios2");
+                    .HasConstraintName("FK_Profesionales_Provincias");
+            });
+
+            modelBuilder.Entity<ProgresosXpacientesXjuego>(entity =>
+            {
+                entity.ToTable("ProgresosXPacientesXJuegos");
+
+                entity.Property(e => e.FechaFinalizacionJuego).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicioJuego).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Juego)
+                    .WithMany(p => p.ProgresosXpacientesXjuegos)
+                    .HasForeignKey(d => d.JuegoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Juegos");
+
+                entity.HasOne(d => d.Paciente)
+                    .WithMany(p => p.ProgresosXpacientesXjuegos)
+                    .HasForeignKey(d => d.PacienteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Pacientes");
+
+                entity.HasOne(d => d.Profesional)
+                    .WithMany(p => p.ProgresosXpacientesXjuegos)
+                    .HasForeignKey(d => d.ProfesionalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Profesionales");
+            });
+
+            modelBuilder.Entity<Provincia>(entity =>
+            {
+                entity.Property(e => e.Codigo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Pais)
+                    .WithMany(p => p.Provincia)
+                    .HasForeignKey(d => d.PaisId)
+                    .HasConstraintName("FK_Provincias_Paises");
             });
 
             OnModelCreatingPartial(modelBuilder);

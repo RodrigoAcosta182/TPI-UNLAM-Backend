@@ -7,8 +7,8 @@ using TIP_UNLAM_Backend.Data.EF;
 
 namespace TPI_UNLAM_Backend.Servicios.Interfaces
 {
-    public interface IUsuarioServicio
+    public interface IJuegoServicio
     {
-        //public Usuario GetUsuarioById(int idUsuario);
+        public List<Juego> getAllJuegos();
     }
 }
