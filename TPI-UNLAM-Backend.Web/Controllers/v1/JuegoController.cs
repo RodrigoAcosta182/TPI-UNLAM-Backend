@@ -13,9 +13,6 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _juegoServicio = juegoServicio;
         }
 
-
-
-
         public IActionResult Index()
         {
             return View();
