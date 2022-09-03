@@ -21,6 +21,7 @@ namespace TIP_UNLAM_Backend.Data.EF
         public virtual DbSet<Paciente> Pacientes { get; set; }
         public virtual DbSet<Paise> Paises { get; set; }
         public virtual DbSet<Profesionale> Profesionales { get; set; }
+        public virtual DbSet<ProfesionalesXpaciente> ProfesionalesXpacientes { get; set; }
         public virtual DbSet<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
 
@@ -29,7 +30,7 @@ namespace TIP_UNLAM_Backend.Data.EF
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-65DV8AP;Database=TPI_UNLAM_DB;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -169,6 +170,27 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .HasForeignKey(d => d.ProvinciaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Profesionales_Provincias");
+            });
+
+            modelBuilder.Entity<ProfesionalesXpaciente>(entity =>
+            {
+                entity.ToTable("ProfesionalesXPacientes");
+
+                entity.Property(e => e.FechaFinalizacionContacto).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicioContacto).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Paciente)
+                    .WithMany(p => p.ProfesionalesXpacientes)
+                    .HasForeignKey(d => d.PacienteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProfesionalesXPacientes_Pacientes");
+
+                entity.HasOne(d => d.Profesional)
+                    .WithMany(p => p.ProfesionalesXpacientes)
+                    .HasForeignKey(d => d.ProfesionalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProfesionalesXPacientes_Profesionales");
             });
 
             modelBuilder.Entity<ProgresosXpacientesXjuego>(entity =>
