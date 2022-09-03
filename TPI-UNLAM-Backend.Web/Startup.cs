@@ -34,9 +34,8 @@ namespace TPI_UNLAM_Backend
 
             services.AddControllers();
             services.AddTransient<TPI_UNLAM_DBContext>();
-            services.AddScoped<IUsuarioServicio, UsuarioServicio>();
-            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddScoped<ILoginServicio, LoginServicio>();
+            services.AddScoped<IJuegoServicio, JuegoServicio>();
+            services.AddScoped<IJuegoRepositorio, JuegoRepositorio>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });

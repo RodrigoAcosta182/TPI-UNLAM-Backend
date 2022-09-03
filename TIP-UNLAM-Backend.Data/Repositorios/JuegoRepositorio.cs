@@ -21,5 +21,10 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             return _ctx.Juegos.OrderBy(x => x.Codigo).ToList();
         }
+
+        public Juego getJuegoById(int idJuego)
+        {
+            return _ctx.Juegos.Find(idJuego);
+        }
     }
 }

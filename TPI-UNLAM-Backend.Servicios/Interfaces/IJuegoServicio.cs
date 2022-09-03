@@ -10,5 +10,6 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     public interface IJuegoServicio
     {
         public List<Juego> getAllJuegos();
+        public Juego getJuegoById(int idJuego);
     }
 }

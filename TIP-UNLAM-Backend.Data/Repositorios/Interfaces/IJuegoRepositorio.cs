@@ -10,5 +10,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
     public interface IJuegoRepositorio
     {
         public List<Juego> getAllJuegos();
+        public Juego getJuegoById(int idJuego);
     }
 }
