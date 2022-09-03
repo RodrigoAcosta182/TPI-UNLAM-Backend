@@ -19,9 +19,9 @@ namespace TIP_UNLAM_Backend.Data.EF
 
         public virtual DbSet<Juego> Juegos { get; set; }
         public virtual DbSet<Paciente> Pacientes { get; set; }
+        public virtual DbSet<PacientesXprofesional> PacientesXprofesionals { get; set; }
         public virtual DbSet<Paise> Paises { get; set; }
         public virtual DbSet<Profesionale> Profesionales { get; set; }
-        public virtual DbSet<ProfesionalesXpaciente> ProfesionalesXpacientes { get; set; }
         public virtual DbSet<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
 
@@ -105,6 +105,27 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .HasConstraintName("FK_Pacientes_Provincias");
             });
 
+            modelBuilder.Entity<PacientesXprofesional>(entity =>
+            {
+                entity.ToTable("PacientesXProfesional");
+
+                entity.Property(e => e.FechaFinalizacionContacto).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicioContacto).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Paciente)
+                    .WithMany(p => p.PacientesXprofesionals)
+                    .HasForeignKey(d => d.PacienteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PacientesXProfesional_Pacientes");
+
+                entity.HasOne(d => d.Profesional)
+                    .WithMany(p => p.PacientesXprofesionals)
+                    .HasForeignKey(d => d.ProfesionalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PacientesXProfesional_Profesionales");
+            });
+
             modelBuilder.Entity<Paise>(entity =>
             {
                 entity.Property(e => e.Codigo)
@@ -170,27 +191,6 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .HasForeignKey(d => d.ProvinciaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Profesionales_Provincias");
-            });
-
-            modelBuilder.Entity<ProfesionalesXpaciente>(entity =>
-            {
-                entity.ToTable("ProfesionalesXPacientes");
-
-                entity.Property(e => e.FechaFinalizacionContacto).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaInicioContacto).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Paciente)
-                    .WithMany(p => p.ProfesionalesXpacientes)
-                    .HasForeignKey(d => d.PacienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProfesionalesXPacientes_Pacientes");
-
-                entity.HasOne(d => d.Profesional)
-                    .WithMany(p => p.ProfesionalesXpacientes)
-                    .HasForeignKey(d => d.ProfesionalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProfesionalesXPacientes_Profesionales");
             });
 
             modelBuilder.Entity<ProgresosXpacientesXjuego>(entity =>

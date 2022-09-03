@@ -9,7 +9,7 @@ namespace TIP_UNLAM_Backend.Data.EF
     {
         public Profesionale()
         {
-            ProfesionalesXpacientes = new HashSet<ProfesionalesXpaciente>();
+            PacientesXprofesionals = new HashSet<PacientesXprofesional>();
             ProgresosXpacientesXjuegos = new HashSet<ProgresosXpacientesXjuego>();
         }
 
@@ -28,7 +28,7 @@ namespace TIP_UNLAM_Backend.Data.EF
 
         public virtual Paise Pais { get; set; }
         public virtual Provincia Provincia { get; set; }
-        public virtual ICollection<ProfesionalesXpaciente> ProfesionalesXpacientes { get; set; }
+        public virtual ICollection<PacientesXprofesional> PacientesXprofesionals { get; set; }
         public virtual ICollection<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
     }
 }
