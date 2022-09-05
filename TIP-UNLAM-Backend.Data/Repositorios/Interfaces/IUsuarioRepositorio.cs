@@ -11,6 +11,8 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
     {
         public void AgregarUsuarioProfesional(Profesionale profesional);
         public void AgregarUsuarioPaciente(Paciente paciente);
+
+        public Paciente getPacienteByEmail(Paciente paciente);
         public void SaveChanges();
 
     }

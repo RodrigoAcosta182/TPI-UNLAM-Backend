@@ -32,5 +32,13 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             _userRepo.SaveChanges();    
         }
+
+        public Paciente getPacienteByEmail(Paciente paciente)
+        {
+            if (_userRepo.getPacienteByEmail(paciente) == null)
+                throw new Exception("No existe el mail");
+
+            return _userRepo.getPacienteByEmail(paciente);
+        }
     }
 }

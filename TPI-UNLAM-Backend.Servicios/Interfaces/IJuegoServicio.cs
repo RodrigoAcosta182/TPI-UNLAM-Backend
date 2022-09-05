@@ -11,5 +11,6 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     {
         public List<Juego> getAllJuegos();
         public Juego getJuegoById(int idJuego);
+        public Paciente getPacienteByEmail(string email);
     }
 }
