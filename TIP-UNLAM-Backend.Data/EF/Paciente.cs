@@ -29,5 +29,7 @@ namespace TIP_UNLAM_Backend.Data.EF
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<PacientesXprofesional> PacientesXprofesionals { get; set; }
         public virtual ICollection<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
+
+
     }
 }

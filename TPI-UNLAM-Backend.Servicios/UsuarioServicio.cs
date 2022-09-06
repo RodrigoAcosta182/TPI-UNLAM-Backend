@@ -21,11 +21,13 @@ namespace TPI_UNLAM_Backend.Servicios
         public void AgregarUsuarioProfesional(Profesionale profesional)
         {
             _userRepo.AgregarUsuarioProfesional(profesional);
+            _userRepo.SaveChanges();
         }
 
         public void AgregarUsuarioPaciente(Paciente paciente)
         {
             _userRepo.AgregarUsuarioPaciente(paciente);
+            _userRepo.SaveChanges();
         }
 
         public void SaveChanges()

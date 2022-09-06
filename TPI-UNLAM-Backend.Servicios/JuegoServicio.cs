@@ -27,6 +27,5 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             return _juegoRepo.getJuegoById(idJuego);
         }
-
     }
 }
