@@ -20,7 +20,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return View();
         }
 
-        [HttpPost("api/v1/auth")]
+        [HttpPost("api/v1/agregarUsuario")]
         public void agregarUsuario(Paciente pacientes)
         {
             _usuarioServicio.AgregarUsuarioPaciente(pacientes);
