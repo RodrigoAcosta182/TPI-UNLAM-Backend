@@ -15,11 +15,6 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _usuarioServicio = usuarioServicio;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost("api/v1/agregarUsuario")]
         public void agregarUsuario(Paciente pacientes)
         {
