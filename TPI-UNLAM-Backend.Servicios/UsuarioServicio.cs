@@ -13,7 +13,7 @@ namespace TPI_UNLAM_Backend.Servicios
     {
         private IUsuarioRepositorio _userRepo;
 
-        public UsuarioServicio(IUsuarioRepositorio userRepo) 
+        public UsuarioServicio(IUsuarioRepositorio userRepo)
         {
             _userRepo = userRepo;
         }
@@ -32,15 +32,29 @@ namespace TPI_UNLAM_Backend.Servicios
 
         public void SaveChanges()
         {
-            _userRepo.SaveChanges();    
+            _userRepo.SaveChanges();
         }
 
-        public Paciente getPacienteByEmail(Paciente paciente)
+        public Paciente getPacienteByEmail(string email)
         {
-            if (_userRepo.getPacienteByEmail(paciente) == null)
-                throw new Exception("No existe el mail");
+            return _userRepo.getPacienteByEmail(email);
+        }
 
-            return _userRepo.getPacienteByEmail(paciente);
+        public Paciente Login(string email, string clave)
+        {
+            Paciente paciente = new Paciente();
+            if (email == null || clave == null)
+                throw new Exception("Los datos ingresados incorrectos");
+
+            paciente = _userRepo.getPacienteByEmail(email);
+
+            if (paciente == null)
+                throw new Exception("Mail o clave incorrecta");
+
+            if (paciente.Contrasena != clave)
+                throw new Exception("Mail o clave incorrecta");
+
+            return paciente;
         }
     }
 }

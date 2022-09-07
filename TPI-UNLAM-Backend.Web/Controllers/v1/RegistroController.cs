@@ -26,5 +26,11 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _usuarioServicio.AgregarUsuarioPaciente(pacientes);
         }
 
+        [HttpPost("api/v1/auth")]
+        public void Login(string mail, string clave)
+        {
+            _usuarioServicio.Login(mail, clave);
+        }
+
     }
 }

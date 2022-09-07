@@ -26,21 +26,14 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             _ctx.Add(paciente);
         }
-
-        public Paciente getPacienteByEmail(string email)
-        {
-            return _ctx.Pacientes.Find(email);
-        }
-
-
         public void SaveChanges()
         {
             _ctx.SaveChanges();
         }
 
-        public Paciente getPacienteByEmail(Paciente paciente)
+        public Paciente getPacienteByEmail(string mail)
         {
-            return _ctx.Pacientes.Find(paciente.Mail);
+            return _ctx.Pacientes.Where(x => x.Mail == mail).FirstOrDefault();
         }
     }
 }
