@@ -9,8 +9,6 @@ namespace TIP_UNLAM_Backend.Data.EF
     {
         public Usuario()
         {
-            ProgresosXusuarioXjuegoUsuarioPacientes = new HashSet<ProgresosXusuarioXjuego>();
-            ProgresosXusuarioXjuegoUsuarioProfesionals = new HashSet<ProgresosXusuarioXjuego>();
             UsuarioXusuarioUsuarioPacientes = new HashSet<UsuarioXusuario>();
             UsuarioXusuarioUsuarioProfesionals = new HashSet<UsuarioXusuario>();
         }
@@ -19,6 +17,7 @@ namespace TIP_UNLAM_Backend.Data.EF
         public string Nombre { get; set; }
         public string Apeliido { get; set; }
         public string Dni { get; set; }
+        public string Matricula { get; set; }
         public string Mail { get; set; }
         public string Contrasena { get; set; }
         public int TipoUsuarioId { get; set; }
@@ -27,8 +26,6 @@ namespace TIP_UNLAM_Backend.Data.EF
         public bool Activo { get; set; }
 
         public virtual TipoUsuario TipoUsuario { get; set; }
-        public virtual ICollection<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegoUsuarioPacientes { get; set; }
-        public virtual ICollection<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegoUsuarioProfesionals { get; set; }
         public virtual ICollection<UsuarioXusuario> UsuarioXusuarioUsuarioPacientes { get; set; }
         public virtual ICollection<UsuarioXusuario> UsuarioXusuarioUsuarioProfesionals { get; set; }
     }

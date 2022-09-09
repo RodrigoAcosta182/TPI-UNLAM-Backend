@@ -18,7 +18,5 @@ namespace TIP_UNLAM_Backend.Data.EF
         public int JuegoId { get; set; }
 
         public virtual Juego Juego { get; set; }
-        public virtual Usuario UsuarioPaciente { get; set; }
-        public virtual Usuario UsuarioProfesional { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace TIP_UNLAM_Backend.Data.EF
 
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public string Matricula { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
