@@ -18,12 +18,10 @@ namespace TIP_UNLAM_Backend.Data.EF
         }
 
         public virtual DbSet<Juego> Juegos { get; set; }
-        public virtual DbSet<Paciente> Pacientes { get; set; }
-        public virtual DbSet<PacientesXprofesional> PacientesXprofesionals { get; set; }
-        public virtual DbSet<Paise> Paises { get; set; }
-        public virtual DbSet<Profesionale> Profesionales { get; set; }
-        public virtual DbSet<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
-        public virtual DbSet<Provincia> Provincias { get; set; }
+        public virtual DbSet<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }
+        public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<UsuarioXusuario> UsuarioXusuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -56,184 +54,104 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Paciente>(entity =>
+            modelBuilder.Entity<ProgresosXusuarioXjuego>(entity =>
             {
-                entity.Property(e => e.Apellido)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.ToTable("ProgresosXUsuarioXJuego");
 
-                entity.Property(e => e.Contrasena)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.FechaFinalizacion).HasColumnType("datetime");
 
-                entity.Property(e => e.Direccion)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Dni)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FechaAlta).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaNacimiento).HasColumnType("datetime");
-
-                entity.Property(e => e.Mail)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Pais)
-                    .WithMany(p => p.Pacientes)
-                    .HasForeignKey(d => d.PaisId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Pacientes_Paises");
-
-                entity.HasOne(d => d.Provincia)
-                    .WithMany(p => p.Pacientes)
-                    .HasForeignKey(d => d.ProvinciaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Pacientes_Provincias");
-            });
-
-            modelBuilder.Entity<PacientesXprofesional>(entity =>
-            {
-                entity.ToTable("PacientesXProfesional");
-
-                entity.Property(e => e.FechaFinalizacionContacto).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaInicioContacto).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Paciente)
-                    .WithMany(p => p.PacientesXprofesionals)
-                    .HasForeignKey(d => d.PacienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PacientesXProfesional_Pacientes");
-
-                entity.HasOne(d => d.Profesional)
-                    .WithMany(p => p.PacientesXprofesionals)
-                    .HasForeignKey(d => d.ProfesionalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PacientesXProfesional_Profesionales");
-            });
-
-            modelBuilder.Entity<Paise>(entity =>
-            {
-                entity.Property(e => e.Codigo)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Profesionale>(entity =>
-            {
-                entity.Property(e => e.Apellido)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Contrasena)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Direccion)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Dni)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FechaAlta).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaNacimiento).HasColumnType("datetime");
-
-                entity.Property(e => e.Legajo)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Mail)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Pais)
-                    .WithMany(p => p.Profesionales)
-                    .HasForeignKey(d => d.PaisId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Profesionales_Paises");
-
-                entity.HasOne(d => d.Provincia)
-                    .WithMany(p => p.Profesionales)
-                    .HasForeignKey(d => d.ProvinciaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Profesionales_Provincias");
-            });
-
-            modelBuilder.Entity<ProgresosXpacientesXjuego>(entity =>
-            {
-                entity.ToTable("ProgresosXPacientesXJuegos");
-
-                entity.Property(e => e.FechaFinalizacionJuego).HasColumnType("datetime");
-
-                entity.Property(e => e.FechaInicioJuego).HasColumnType("datetime");
+                entity.Property(e => e.FechaInicio).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Juego)
-                    .WithMany(p => p.ProgresosXpacientesXjuegos)
+                    .WithMany(p => p.ProgresosXusuarioXjuegos)
                     .HasForeignKey(d => d.JuegoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Juegos");
+                    .HasConstraintName("fk_Juegos");
 
-                entity.HasOne(d => d.Paciente)
-                    .WithMany(p => p.ProgresosXpacientesXjuegos)
-                    .HasForeignKey(d => d.PacienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Pacientes");
+                entity.HasOne(d => d.UsuarioPaciente)
+                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioPacientes)
+                    .HasForeignKey(d => d.UsuarioPacienteId)
+                    .HasConstraintName("FK_Table_1_UsuariosPacienteId");
 
-                entity.HasOne(d => d.Profesional)
-                    .WithMany(p => p.ProgresosXpacientesXjuegos)
-                    .HasForeignKey(d => d.ProfesionalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProgresosXPacientesXJuegos_Profesionales");
+                entity.HasOne(d => d.UsuarioProfesional)
+                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioProfesionals)
+                    .HasForeignKey(d => d.UsuarioProfesionalId)
+                    .HasConstraintName("FK_ProgresosXUsuarioXJuego_Usuarios");
             });
 
-            modelBuilder.Entity<Provincia>(entity =>
+            modelBuilder.Entity<TipoUsuario>(entity =>
             {
-                entity.Property(e => e.Codigo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.ToTable("TipoUsuario");
 
                 entity.Property(e => e.Descripcion)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Pais)
-                    .WithMany(p => p.Provincia)
-                    .HasForeignKey(d => d.PaisId)
-                    .HasConstraintName("FK_Provincias_Paises");
+                entity.Property(e => e.Matricula)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.Property(e => e.Apeliido)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Contrasena)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dni)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaAlta).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaNacimiento).HasColumnType("datetime");
+
+                entity.Property(e => e.Mail)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoUsuarioId).HasColumnName("TIpoUsuarioId");
+
+                entity.HasOne(d => d.TipoUsuario)
+                    .WithMany(p => p.Usuarios)
+                    .HasForeignKey(d => d.TipoUsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Usuarios_TipoUsuario");
+            });
+
+            modelBuilder.Entity<UsuarioXusuario>(entity =>
+            {
+                entity.ToTable("UsuarioXUsuario");
+
+                entity.Property(e => e.FechaFinalizacionRelacion).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicioRelacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.UsuarioPaciente)
+                    .WithMany(p => p.UsuarioXusuarioUsuarioPacientes)
+                    .HasForeignKey(d => d.UsuarioPacienteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Table_1_UsuariosPaciente");
+
+                entity.HasOne(d => d.UsuarioProfesional)
+                    .WithMany(p => p.UsuarioXusuarioUsuarioProfesionals)
+                    .HasForeignKey(d => d.UsuarioProfesionalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UsuarioXUsuario_Usuarios");
             });
 
             OnModelCreatingPartial(modelBuilder);

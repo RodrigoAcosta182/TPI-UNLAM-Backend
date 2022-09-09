@@ -20,7 +20,7 @@ namespace TPI_UNLAM_Backend.Servicios
 
         public List<Juego> getAllJuegos()
         {
-           return _juegoRepo.getAllJuegos();
+            return _juegoRepo.getAllJuegos();
         }
 
         public Juego getJuegoById(int idJuego)

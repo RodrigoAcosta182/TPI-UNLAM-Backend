@@ -9,10 +9,9 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
 {
     public interface IUsuarioServicio
     {
-        public void AgregarUsuarioProfesional(Profesionale profesional);
-        public void AgregarUsuarioPaciente(Paciente paciente);
-        public Paciente getPacienteByEmail(string email);
-        public Paciente Login(string email, string clave);
+        public void AgregarUsuario(Usuario usuario);
+        public Usuario getUsuarioByEmail(string email);
+        public Usuario Login(string email, string clave);
         public void SaveChanges();
     }
 }

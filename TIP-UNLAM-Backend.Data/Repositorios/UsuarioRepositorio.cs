@@ -17,23 +17,21 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             _ctx = ctx;
         }
 
-        public void AgregarUsuarioProfesional(Profesionale profesional)
+        public void AgregarUsuario(Usuario usuario)
         {
-            _ctx.Add(profesional);
+            _ctx.Add(usuario);
         }
 
-        public void AgregarUsuarioPaciente(Paciente paciente)
-        {
-            _ctx.Add(paciente);
-        }
+
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();
         }
 
-        public Paciente getPacienteByEmail(string mail)
+        public Usuario getUsuarioByEmail(string mail)
         {
-            return _ctx.Pacientes.Where(x => x.Mail == mail).FirstOrDefault();
+            return _ctx.Usuarios.Where(x => x.Mail == mail).FirstOrDefault();
         }
     }
 }

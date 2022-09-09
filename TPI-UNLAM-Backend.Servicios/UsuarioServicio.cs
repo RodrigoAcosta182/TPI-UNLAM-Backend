@@ -18,16 +18,18 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo = userRepo;
         }
 
-        public void AgregarUsuarioProfesional(Profesionale profesional)
+        public void AgregarUsuario(Usuario usuario)
         {
-            _userRepo.AgregarUsuarioProfesional(profesional);
-            _userRepo.SaveChanges();
-        }
-
-        public void AgregarUsuarioPaciente(Paciente paciente)
-        {
-            _userRepo.AgregarUsuarioPaciente(paciente);
-            _userRepo.SaveChanges();
+            if (usuario.TipoUsuario.Descripcion == "Paciente")
+            {
+                usuario.TipoUsuarioId = 1;
+                
+            }
+            else
+            {
+                usuario.TipoUsuarioId = 2;
+            }
+            _userRepo.AgregarUsuario(usuario);
         }
 
         public void SaveChanges()
@@ -35,26 +37,26 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo.SaveChanges();
         }
 
-        public Paciente getPacienteByEmail(string email)
+        public Usuario getUsuarioByEmail(string email)
         {
-            return _userRepo.getPacienteByEmail(email);
+            return _userRepo.getUsuarioByEmail(email);
         }
 
-        public Paciente Login(string email, string clave)
+        public Usuario Login(string email, string clave)
         {
-            Paciente paciente = new Paciente();
+            Usuario usuario = new Usuario();
             if (email == null || clave == null)
                 throw new Exception("Los datos ingresados incorrectos");
 
-            paciente = _userRepo.getPacienteByEmail(email);
+            usuario = _userRepo.getUsuarioByEmail(email);
 
-            if (paciente == null)
+            if (usuario == null)
                 throw new Exception("Mail o clave incorrecta");
 
-            if (paciente.Contrasena != clave)
+            if (usuario.Contrasena != clave)
                 throw new Exception("Mail o clave incorrecta");
 
-            return paciente;
+            return usuario;
         }
     }
 }

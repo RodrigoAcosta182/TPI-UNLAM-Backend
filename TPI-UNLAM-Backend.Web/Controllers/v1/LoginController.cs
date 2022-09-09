@@ -9,17 +9,17 @@ namespace TPI_UNLAM_Backend.Controllers.v1
     public class LoginController : Controller
     {
 
-        //private readonly ILoginServicio _loginServicio;
+        private readonly IUsuarioServicio _usuarioServicio;
 
-        //public LoginController(ILoginServicio loginServicio)
-        //{
-        //    _loginServicio = loginServicio; 
-        //}
+        public LoginController(IUsuarioServicio usuarioServicio)
+        {
+            _usuarioServicio = usuarioServicio;
+        }
 
-        //[HttpPost("api/v1/auth")]
-        //public ActionResult <List<Profesionale>> autenticarUsuario()
-        //{
-        //    return true;
-        //}
+        [HttpPost("api/v1/auth")]
+        public void Login(string mail, string clave)
+        {
+            _usuarioServicio.Login(mail, clave);
+        }
     }
 }

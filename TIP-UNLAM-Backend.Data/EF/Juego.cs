@@ -9,7 +9,7 @@ namespace TIP_UNLAM_Backend.Data.EF
     {
         public Juego()
         {
-            ProgresosXpacientesXjuegos = new HashSet<ProgresosXpacientesXjuego>();
+            ProgresosXusuarioXjuegos = new HashSet<ProgresosXusuarioXjuego>();
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace TIP_UNLAM_Backend.Data.EF
         public string Ruta { get; set; }
         public bool Activo { get; set; }
 
-        public virtual ICollection<ProgresosXpacientesXjuego> ProgresosXpacientesXjuegos { get; set; }
+        public virtual ICollection<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }
     }
 }
