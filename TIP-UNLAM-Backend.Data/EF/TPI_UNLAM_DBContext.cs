@@ -67,16 +67,6 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .HasForeignKey(d => d.JuegoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Juegos");
-
-                entity.HasOne(d => d.UsuarioPaciente)
-                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioPacientes)
-                    .HasForeignKey(d => d.UsuarioPacienteId)
-                    .HasConstraintName("FK_Table_1_UsuariosPacienteId");
-
-                entity.HasOne(d => d.UsuarioProfesional)
-                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioProfesionals)
-                    .HasForeignKey(d => d.UsuarioProfesionalId)
-                    .HasConstraintName("FK_ProgresosXUsuarioXJuego_Usuarios");
             });
 
             modelBuilder.Entity<TipoUsuario>(entity =>
@@ -85,10 +75,6 @@ namespace TIP_UNLAM_Backend.Data.EF
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Matricula)
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -116,6 +102,10 @@ namespace TIP_UNLAM_Backend.Data.EF
 
                 entity.Property(e => e.Mail)
                     .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Matricula)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

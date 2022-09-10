@@ -8,7 +8,7 @@ using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 
 namespace TIP_UNLAM_Backend.Data.Repositorios
 {
-    internal class UsuarioRepositorio : IUsuarioRepositorio
+    public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private TPI_UNLAM_DBContext _ctx;
 

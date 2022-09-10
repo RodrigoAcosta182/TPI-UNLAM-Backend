@@ -9,7 +9,7 @@ using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Servicios
 {
-    internal class UsuarioServicio : IUsuarioServicio
+    public class UsuarioServicio : IUsuarioServicio
     {
         private IUsuarioRepositorio _userRepo;
 
