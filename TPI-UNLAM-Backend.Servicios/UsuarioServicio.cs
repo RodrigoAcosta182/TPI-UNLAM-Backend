@@ -20,6 +20,10 @@ namespace TPI_UNLAM_Backend.Servicios
 
         public void AgregarUsuario(Usuario usuario)
         {
+            usuario.FechaAlta = DateTime.Now;
+            usuario.Activo = true;
+            usuario.Matricula = "";
+
             if (usuario.TipoUsuario.Descripcion == "Paciente")
             {
                 usuario.TipoUsuarioId = 1;
