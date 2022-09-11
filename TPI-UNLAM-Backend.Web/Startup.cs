@@ -21,16 +21,19 @@ namespace TPI_UNLAM_Backend
 {
     public class Startup
     {
+        private readonly string _myCors = "MyCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+        
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+        
 
             services.AddControllers();
             services.AddTransient<TPI_UNLAM_DBContext>();
@@ -41,6 +44,18 @@ namespace TPI_UNLAM_Backend
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });
+            });
+
+            //agrego servicio de CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy(_myCors, builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
             });
         }
 
@@ -53,6 +68,9 @@ namespace TPI_UNLAM_Backend
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TPI_UNLAM_Backend v1"));
             }
+
+            //agrego servicio de CORS
+            app.UseCors(_myCors);
 
             app.UseHttpsRedirection();
 
