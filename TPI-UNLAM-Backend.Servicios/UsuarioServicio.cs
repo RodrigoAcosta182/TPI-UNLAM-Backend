@@ -24,16 +24,8 @@ namespace TPI_UNLAM_Backend.Servicios
             usuario.Activo = true;
             usuario.Matricula = "";
 
-            if (usuario.TipoUsuario.Descripcion == "Paciente")
-            {
-                usuario.TipoUsuarioId = 1;
-                
-            }
-            else
-            {
-                usuario.TipoUsuarioId = 2;
-            }
             _userRepo.AgregarUsuario(usuario);
+            _userRepo.SaveChanges();
         }
 
         public void SaveChanges()

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="EF\" />
     <Folder Include="ModeloEF\" />
   </ItemGroup>
 

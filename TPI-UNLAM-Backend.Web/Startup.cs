@@ -26,17 +26,17 @@ namespace TPI_UNLAM_Backend
         {
             Configuration = configuration;
         }
-        
+
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-        
+
 
             services.AddControllers();
-            services.AddTransient<TPI_UNLAM_DBContext>();
+            services.AddTransient<TPI_UNLAM_DB_Context>();
             services.AddScoped<IJuegoServicio, JuegoServicio>();
             services.AddScoped<IJuegoRepositorio, JuegoRepositorio>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();

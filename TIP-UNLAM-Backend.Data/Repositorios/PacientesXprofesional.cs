@@ -10,9 +10,9 @@
 //{
 //    public class PacientesXprofesional : IPacientesXprofesional
 //    {
-//        private TPI_UNLAM_DBContext _ctx;
+//        private TPI_UNLAM_DB_Context _ctx;
 
-//        public PacientesXprofesional(TPI_UNLAM_DBContext ctx)
+//        public PacientesXprofesional(TPI_UNLAM_DB_Context ctx)
 //        {
 //            _ctx = ctx;
 //        }

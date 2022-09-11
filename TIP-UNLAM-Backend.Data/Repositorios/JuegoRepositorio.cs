@@ -10,9 +10,9 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 {
     public class JuegoRepositorio : IJuegoRepositorio
     {
-        private TPI_UNLAM_DBContext _ctx;
+        private TPI_UNLAM_DB_Context _ctx;
 
-        public JuegoRepositorio(TPI_UNLAM_DBContext ctx)
+        public JuegoRepositorio(TPI_UNLAM_DB_Context ctx)
         {
             _ctx = ctx;
         }

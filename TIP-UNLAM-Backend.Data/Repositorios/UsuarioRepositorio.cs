@@ -10,9 +10,9 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 {
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
-        private TPI_UNLAM_DBContext _ctx;
+        private TPI_UNLAM_DB_Context _ctx;
 
-        public UsuarioRepositorio(TPI_UNLAM_DBContext ctx)
+        public UsuarioRepositorio(TPI_UNLAM_DB_Context ctx)
         {
             _ctx = ctx;
         }

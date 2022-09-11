@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TIP_UNLAM_Backend.Data.EF
 {
-    public partial class TPI_UNLAM_DBContext : DbContext
+    public partial class TPI_UNLAM_DB_Context : DbContext
     {
-        public TPI_UNLAM_DBContext()
+        public TPI_UNLAM_DB_Context()
         {
         }
 
-        public TPI_UNLAM_DBContext(DbContextOptions<TPI_UNLAM_DBContext> options)
+        public TPI_UNLAM_DB_Context(DbContextOptions<TPI_UNLAM_DB_Context> options)
             : base(options)
         {
         }
@@ -28,7 +28,7 @@ namespace TIP_UNLAM_Backend.Data.EF
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB_;Integrated Security=True;Trusted_Connection=True;");
             }
         }
 
@@ -45,12 +45,12 @@ namespace TIP_UNLAM_Backend.Data.EF
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ruta)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
@@ -66,7 +66,17 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .WithMany(p => p.ProgresosXusuarioXjuegos)
                     .HasForeignKey(d => d.JuegoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_Juegos");
+                    .HasConstraintName("FK__Progresos__Juego__38996AB5");
+
+                entity.HasOne(d => d.UsuarioPaciente)
+                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioPacientes)
+                    .HasForeignKey(d => d.UsuarioPacienteId)
+                    .HasConstraintName("FK__Progresos__Usuar__36B12243");
+
+                entity.HasOne(d => d.UsuarioProfesional)
+                    .WithMany(p => p.ProgresosXusuarioXjuegoUsuarioProfesionals)
+                    .HasForeignKey(d => d.UsuarioProfesionalId)
+                    .HasConstraintName("FK__Progresos__Usuar__37A5467C");
             });
 
             modelBuilder.Entity<TipoUsuario>(entity =>
@@ -81,14 +91,14 @@ namespace TIP_UNLAM_Backend.Data.EF
 
             modelBuilder.Entity<Usuario>(entity =>
             {
-                entity.Property(e => e.Apeliido)
+                entity.Property(e => e.Apellido)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Contrasena)
                     .IsRequired()
-                    .HasMaxLength(200)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Dni)
@@ -120,7 +130,7 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.TipoUsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Usuarios_TipoUsuario");
+                    .HasConstraintName("FK__Usuarios__TIpoUs__286302EC");
             });
 
             modelBuilder.Entity<UsuarioXusuario>(entity =>
@@ -135,13 +145,13 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .WithMany(p => p.UsuarioXusuarioUsuarioPacientes)
                     .HasForeignKey(d => d.UsuarioPacienteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Table_1_UsuariosPaciente");
+                    .HasConstraintName("FK__UsuarioXU__Usuar__2F10007B");
 
                 entity.HasOne(d => d.UsuarioProfesional)
                     .WithMany(p => p.UsuarioXusuarioUsuarioProfesionals)
                     .HasForeignKey(d => d.UsuarioProfesionalId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsuarioXUsuario_Usuarios");
+                    .HasConstraintName("FK__UsuarioXU__Usuar__300424B4");
             });
 
             OnModelCreatingPartial(modelBuilder);
