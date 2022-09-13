@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
@@ -57,18 +58,18 @@ namespace TPI_UNLAM_Backend.Servicios
             return _userRepo.getUsuarioByEmail(email);
         }
 
-        public Usuario Login(string email, string clave)
+        public Usuario Login(LoginDto loginDto)
         {
             Usuario usuario = new Usuario();
-            if (email == null || clave == null)
+            if (loginDto.email == null || loginDto.contrasena == null)
                 throw new Exception("Los datos ingresados incorrectos");
 
-            usuario = _userRepo.getUsuarioByEmail(email);
+            usuario = _userRepo.getUsuarioByEmail(loginDto.email);
 
             if (usuario == null)
                 throw new Exception("Mail o clave incorrecta");
 
-            if (usuario.Contrasena != clave)
+            if (usuario.Contrasena != loginDto.contrasena)
                 throw new Exception("Mail o clave incorrecta");
 
             return usuario;

@@ -273,4 +273,6 @@ __pycache__/
 
 obj/
 
+TIP-UNLAM-Backend.Data/EF/TPI_UNLAM_DB_Context.cs
+
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore
