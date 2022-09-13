@@ -5,6 +5,7 @@ using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Controllers.v1
 {
+    [ApiController]
     public class RegistroController : Controller
     {
 
@@ -16,7 +17,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         }
 
         [HttpPost("api/v1/agregarUsuario")]
-        public void agregarUsuario(Usuario usuario)
+        public void agregarUsuario([FromBody] Usuario usuario)
         {
             _usuarioServicio.AgregarUsuario(usuario);
         }
