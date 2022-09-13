@@ -17,9 +17,9 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         }
 
         [HttpPost("api/v1/auth")]
-        public void Login(string mail, string clave)
+        public Usuario Login(string mail, string clave)
         {
-            _usuarioServicio.Login(mail, clave);
+           return _usuarioServicio.Login(mail, clave);
         }
     }
 }

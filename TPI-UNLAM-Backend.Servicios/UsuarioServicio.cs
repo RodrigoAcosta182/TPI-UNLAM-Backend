@@ -22,7 +22,15 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             usuario.FechaAlta = DateTime.Now;
             usuario.Activo = true;
-            usuario.Matricula = "";
+
+            if (String.IsNullOrEmpty(usuario.Matricula))
+            {
+                usuario.TipoUsuarioId = 1;
+            }
+            else
+            {
+                usuario.TipoUsuarioId = 2;
+            }
 
             _userRepo.AgregarUsuario(usuario);
             _userRepo.SaveChanges();
