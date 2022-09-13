@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,9 +28,12 @@ namespace TPI_UNLAM_Backend.Servicios
             if (ContrasenaSegura(usuario.Contrasena) == false)
                 throw new Exception("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
 
+            if (ValidateEmail(usuario.Mail))
+                throw new Exception("El mail no es valido");
+
             usuario.FechaAlta = DateTime.Now;
             usuario.Activo = true;
-
+            
             if (String.IsNullOrEmpty(usuario.Matricula))
             {
                 usuario.TipoUsuarioId = 1;
@@ -68,6 +72,17 @@ namespace TPI_UNLAM_Backend.Servicios
                 throw new Exception("Mail o clave incorrecta");
 
             return usuario;
+        }
+
+        private Boolean ValidateEmail(String email)
+        {
+            if (email == null)
+                return false;
+            
+            if (new EmailAddressAttribute().IsValid(email))
+                return true;
+
+            return false;
         }
 
         private Boolean ContrasenaSegura(String contraseñaSinVerificar)
