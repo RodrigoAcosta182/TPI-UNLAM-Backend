@@ -34,7 +34,7 @@ namespace TPI_UNLAM_Backend.Servicios
 
             usuario.FechaAlta = DateTime.Now;
             usuario.Activo = true;
-            
+
             if (String.IsNullOrEmpty(usuario.Matricula))
             {
                 usuario.TipoUsuarioId = 1;
@@ -79,7 +79,7 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             if (email == null)
                 return false;
-            
+
             if (new EmailAddressAttribute().IsValid(email))
                 return true;
 
@@ -104,7 +104,7 @@ namespace TPI_UNLAM_Backend.Servicios
             //si no contiene los numeros, regresa false
             if (!numeros.IsMatch(contraseñaSinVerificar))
                 return false;
-            
+
             //si no contiene los caracteres especiales, regresa false
             if (!caracEsp.IsMatch(contraseñaSinVerificar))
                 return false;
@@ -115,6 +115,6 @@ namespace TPI_UNLAM_Backend.Servicios
 
             //si cumple con todo, regresa true
             return true;
-}
+        }
     }
 }
