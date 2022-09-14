@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.SecurityTokenService;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,13 +25,13 @@ namespace TPI_UNLAM_Backend.Servicios
         public void AgregarUsuario(Usuario usuario)
         {
             if (getUsuarioByEmail(usuario.Mail) != null)
-                throw new Exception("Ya existe el usuario");
+                throw new BadRequestException("Ya existe el usuario");
 
             if (ContrasenaSegura(usuario.Contrasena) == false)
-                throw new Exception("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
+                throw new BadRequestException("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
 
             if (ValidateEmail(usuario.Mail) == false)
-                throw new Exception("El mail no es valido");
+                throw new BadRequestException("El mail no es valido");
 
             usuario.FechaAlta = DateTime.Now;
             usuario.Activo = true;
@@ -62,15 +63,15 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             Usuario usuario = new Usuario();
             if (loginDto.email == null || loginDto.contrasena == null)
-                throw new Exception("Los datos ingresados incorrectos");
+                throw new BadRequestException("Los datos ingresados incorrectos");
 
             usuario = _userRepo.getUsuarioByEmail(loginDto.email);
 
             if (usuario == null)
-                throw new Exception("Mail o clave incorrecta");
+                throw new BadRequestException("Mail o clave incorrecta");
 
             if (usuario.Contrasena != loginDto.contrasena)
-                throw new Exception("Mail o clave incorrecta");
+                throw new BadRequestException("Mail o clave incorrecta");
 
             return usuario;
         }
