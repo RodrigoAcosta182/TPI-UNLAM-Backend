@@ -29,7 +29,7 @@ namespace TPI_UNLAM_Backend.Servicios
             if (ContrasenaSegura(usuario.Contrasena) == false)
                 throw new Exception("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
 
-            if (ValidateEmail(usuario.Mail))
+            if (ValidateEmail(usuario.Mail) == false)
                 throw new Exception("El mail no es valido");
 
             usuario.FechaAlta = DateTime.Now;
