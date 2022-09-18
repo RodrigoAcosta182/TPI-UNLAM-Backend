@@ -22,7 +22,7 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo = userRepo;
         }
 
-        public void AgregarUsuario(Usuario usuario)
+        public bool AgregarUsuario(Usuario usuario)
         {
             if (getUsuarioByEmail(usuario.Mail) != null)
                 throw new BadRequestException("Ya existe el usuario");
@@ -47,6 +47,7 @@ namespace TPI_UNLAM_Backend.Servicios
 
             _userRepo.AgregarUsuario(usuario);
             _userRepo.SaveChanges();
+            return true;
         }
 
         public void SaveChanges()

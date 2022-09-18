@@ -17,9 +17,14 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         }
 
         [HttpPost("api/v1/agregarUsuario")]
-        public void agregarUsuario([FromBody] Usuario usuario)
+        public string agregarUsuario([FromBody] Usuario usuario)
         {
-            _usuarioServicio.AgregarUsuario(usuario);
+
+            if (_usuarioServicio.AgregarUsuario(usuario) == true)
+                return "El usuario se registro correctamente";
+
+            return "No se pudo registrar el usuario";
+                    
         }
     }
 }

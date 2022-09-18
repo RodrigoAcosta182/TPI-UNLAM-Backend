@@ -10,7 +10,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
 {
     public interface IUsuarioServicio
     {
-        public void AgregarUsuario(Usuario usuario);
+        public bool AgregarUsuario(Usuario usuario);
         public Usuario getUsuarioByEmail(string email);
         public Usuario Login(LoginDto loginDto);
         public void SaveChanges();
