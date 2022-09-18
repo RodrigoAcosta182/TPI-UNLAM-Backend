@@ -22,32 +22,40 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo = userRepo;
         }
 
-        public bool AgregarUsuario(Usuario usuario)
+        public string AgregarUsuario(Usuario usuario)
         {
-            if (getUsuarioByEmail(usuario.Mail) != null)
-                throw new BadRequestException("Ya existe el usuario");
-
-            if (ContrasenaSegura(usuario.Contrasena) == false)
-                throw new BadRequestException("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
-
-            if (ValidateEmail(usuario.Mail) == false)
-                throw new BadRequestException("El mail no es valido");
-
-            usuario.FechaAlta = DateTime.Now;
-            usuario.Activo = true;
-
-            if (String.IsNullOrEmpty(usuario.Matricula))
+            try
             {
-                usuario.TipoUsuarioId = 1;
-            }
-            else
-            {
-                usuario.TipoUsuarioId = 2;
-            }
+                if (getUsuarioByEmail(usuario.Mail) != null)
+                    throw new BadRequestException("Ya existe el usuario");
 
-            _userRepo.AgregarUsuario(usuario);
-            _userRepo.SaveChanges();
-            return true;
+                if (ContrasenaSegura(usuario.Contrasena) == false)
+                    throw new BadRequestException("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
+
+                if (ValidateEmail(usuario.Mail) == false)
+                    throw new BadRequestException("El mail no es valido");
+
+                usuario.FechaAlta = DateTime.Now;
+                usuario.Activo = true;
+
+                if (String.IsNullOrEmpty(usuario.Matricula))
+                {
+                    usuario.TipoUsuarioId = 1;
+                }
+                else
+                {
+                    usuario.TipoUsuarioId = 2;
+                }
+
+                _userRepo.AgregarUsuario(usuario);
+                _userRepo.SaveChanges();
+                return "El usuario se registro correctamente"; ;
+            }
+            catch (Exception)
+            {
+                return "No se pudo registrar el usuario"; ;
+            }
+           
         }
 
         public void SaveChanges()
