@@ -12,6 +12,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public void AgregarUsuario(Usuario profesional);
         public Usuario getUsuarioByEmail(string email);
         public void SaveChanges();
-
+        public Usuario getUsuarioById(int id);
     }
 }

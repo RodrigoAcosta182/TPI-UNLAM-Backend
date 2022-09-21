@@ -12,6 +12,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     {
         public string AgregarUsuario(Usuario usuario);
         public Usuario getUsuarioByEmail(string email);
+        public Usuario getUsuarioById(int id);
         public Usuario Login(LoginDto loginDto);
         public void SaveChanges();
     }

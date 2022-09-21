@@ -85,6 +85,7 @@ namespace TIP_UNLAM_Backend.Data.EF
                 entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.ProgresosXusuarioXjuegos)
                     .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Progresos__Usuar__36B12243");
             });
 

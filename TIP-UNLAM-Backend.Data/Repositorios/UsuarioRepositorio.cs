@@ -22,8 +22,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             _ctx.Add(usuario);
         }
 
-
-
         public void SaveChanges()
         {
             _ctx.SaveChanges();
@@ -32,6 +30,11 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         public Usuario getUsuarioByEmail(string mail)
         {
             return _ctx.Usuarios.Where(x => x.Mail == mail).FirstOrDefault();
+        }
+
+        public Usuario getUsuarioById(int id)
+        {
+            return _ctx.Usuarios.Find(id);
         }
     }
 }

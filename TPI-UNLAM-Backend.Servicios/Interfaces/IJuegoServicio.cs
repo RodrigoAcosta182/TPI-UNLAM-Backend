@@ -13,5 +13,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public Juego getJuegoById(int idJuego);
         public List<Colore> getAllColores();
         public bool validarStringIguales(string campo1, string campo2);
+        public void FinalizarJuego(ProgresosXusuarioXjuego juego);
+        public void SaveChanges();
     }
 }
