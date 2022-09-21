@@ -89,7 +89,7 @@ namespace TPI_UNLAM_Backend.Servicios
             }
             catch (Exception)
             {
-                throw new BadRequestException("Los datos ingresados incorrectos"); ;
+                throw new BadRequestException("Los datos ingresados incorrectos"); 
             }
           
         }
@@ -134,6 +134,19 @@ namespace TPI_UNLAM_Backend.Servicios
 
             //si cumple con todo, regresa true
             return true;
+        }
+
+        public Usuario getUsuarioById(int id)
+        {
+            if (id == null)
+                throw new BadRequestException("Los datos ingresados incorrectos");
+
+            Usuario user = _userRepo.getUsuarioById(id);
+
+            if (user == null)
+                throw new BadRequestException("No existe Usuario");
+
+            return user;
         }
     }
 }

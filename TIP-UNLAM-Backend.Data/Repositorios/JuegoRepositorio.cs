@@ -27,6 +27,16 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             return _ctx.Juegos.Find(idJuego);
         }
 
+        public void FinalizarJuego(ProgresosXusuarioXjuego juego)
+        {
+            _ctx.Add(juego);
+        }
+
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
+        }
+
         public List<Colore> getAllColores()
         {
             return _ctx.Colores.ToList();

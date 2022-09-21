@@ -8,7 +8,7 @@ namespace TIP_UNLAM_Backend.Data.EF
     public partial class ProgresosXusuarioXjuego
     {
         public int Id { get; set; }
-        public int? UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
         public int JuegoId { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFinalizacion { get; set; }

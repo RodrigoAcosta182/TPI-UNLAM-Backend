@@ -38,7 +38,13 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _juegoServicio.validarStringIguales(campo1, campo2);
         }
 
-      
+        [HttpPost("api/v1/FinalizarJuego")]
+        public void FinalizarJuego(ProgresosXusuarioXjuego juego)
+        {
+            _juegoServicio.FinalizarJuego(juego);
+        }
+
+
 
 
 

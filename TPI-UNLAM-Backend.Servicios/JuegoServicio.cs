@@ -13,10 +13,28 @@ namespace TPI_UNLAM_Backend.Servicios
     public class JuegoServicio : IJuegoServicio
     {
         private IJuegoRepositorio _juegoRepo;
+        private IUsuarioRepositorio _userRepo;
 
-        public JuegoServicio(IJuegoRepositorio juegoRepo)
+        public JuegoServicio(IJuegoRepositorio juegoRepo, IUsuarioRepositorio userRepo)
         {
             _juegoRepo = juegoRepo;
+            _userRepo = userRepo;
+        }
+
+        public void FinalizarJuego(ProgresosXusuarioXjuego juego)
+        {
+            if (juego == null)
+                throw new BadRequestException("No se enviaron los campos");
+
+            if (_juegoRepo.getJuegoById(juego.JuegoId) == null)
+                throw new BadRequestException("No existe juego");
+
+            if (_userRepo.getUsuarioById(juego.UsuarioId) == null)
+                throw new BadRequestException("No existe usuario");
+            juego.FechaFinalizacion = DateTime.Now;
+
+            _juegoRepo.FinalizarJuego(juego);
+            _juegoRepo.SaveChanges();
         }
 
         public List<Colore> getAllColores()
@@ -32,6 +50,11 @@ namespace TPI_UNLAM_Backend.Servicios
         public Juego getJuegoById(int idJuego)
         {
             return _juegoRepo.getJuegoById(idJuego);
+        }
+
+        public void SaveChanges()
+        {
+            _juegoRepo.SaveChanges();
         }
 
         public bool validarStringIguales(string campo1, string campo2)
