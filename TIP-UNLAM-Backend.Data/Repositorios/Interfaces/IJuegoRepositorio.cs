@@ -11,5 +11,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
     {
         public List<Juego> getAllJuegos();
         public Juego getJuegoById(int idJuego);
+        public List<Colore> getAllColores();
     }
 }

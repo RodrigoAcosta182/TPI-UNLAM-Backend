@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.SecurityTokenService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,11 @@ namespace TPI_UNLAM_Backend.Servicios
             _juegoRepo = juegoRepo;
         }
 
+        public List<Colore> getAllColores()
+        {
+            return _juegoRepo.getAllColores();
+        }
+
         public List<Juego> getAllJuegos()
         {
             return _juegoRepo.getAllJuegos();
@@ -26,6 +32,29 @@ namespace TPI_UNLAM_Backend.Servicios
         public Juego getJuegoById(int idJuego)
         {
             return _juegoRepo.getJuegoById(idJuego);
+        }
+
+        public bool validarStringIguales(string campo1, string campo2)
+        {
+            try
+            {
+                if (campo1 == null || campo2 == null)
+                    throw new BadRequestException("No se enviaron los campos");
+
+                if (campo1 == campo2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
     }
 }

@@ -17,6 +17,7 @@ namespace TIP_UNLAM_Backend.Data.EF
         {
         }
 
+        public virtual DbSet<Colore> Colores { get; set; }
         public virtual DbSet<Juego> Juegos { get; set; }
         public virtual DbSet<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
@@ -35,6 +36,19 @@ namespace TIP_UNLAM_Backend.Data.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+
+            modelBuilder.Entity<Colore>(entity =>
+            {
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Hexadecimal)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Juego>(entity =>
             {

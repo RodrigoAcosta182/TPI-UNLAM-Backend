@@ -20,11 +20,27 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return View();
         }
 
-        [HttpGet("api/v1/auth")]
-        public ActionResult<List<Juego>> autenticarUsuario()
+        [HttpGet("api/v1/getAllJuegos")]
+        public ActionResult<List<Juego>> GetAllJuegos()
         {
             return _juegoServicio.getAllJuegos();
         }
+
+        [HttpGet("api/v1/getAllColores")]
+        public ActionResult<List<Colore>> GetAllColores()
+        {
+            return _juegoServicio.getAllColores();
+        }
+
+        [HttpPost("api/v1/ValidarCamposIguales")]
+        public bool ValidarCamposIguales(string campo1, string campo2)
+        {
+            return _juegoServicio.validarStringIguales(campo1, campo2);
+        }
+
+      
+
+
 
     }
 }

@@ -70,19 +70,28 @@ namespace TPI_UNLAM_Backend.Servicios
 
         public Usuario Login(LoginDto loginDto)
         {
-            Usuario usuario = new Usuario();
-            if (loginDto.email == null || loginDto.contrasena == null)
-                throw new BadRequestException("Los datos ingresados incorrectos");
+            try
+            {
+                if (loginDto.email == null || loginDto.contrasena == null)
+                    throw new BadRequestException("Los datos ingresados incorrectos");
 
-            usuario = _userRepo.getUsuarioByEmail(loginDto.email);
+                Usuario usuario = new Usuario();
 
-            if (usuario == null)
-                throw new BadRequestException("Mail o clave incorrecta");
+                usuario = _userRepo.getUsuarioByEmail(loginDto.email);
 
-            if (usuario.Contrasena != loginDto.contrasena)
-                throw new BadRequestException("Mail o clave incorrecta");
+                if (usuario == null)
+                    throw new BadRequestException("Mail o clave incorrecta");
 
-            return usuario;
+                if (usuario.Contrasena != loginDto.contrasena)
+                    throw new BadRequestException("Mail o clave incorrecta");
+
+                return usuario;
+            }
+            catch (Exception)
+            {
+                throw new BadRequestException("Los datos ingresados incorrectos"); ;
+            }
+          
         }
 
         private Boolean ValidateEmail(String email)
