@@ -79,5 +79,32 @@ namespace TPI_UNLAM_Backend.Servicios
             }
 
         }
+
+        public List<int> getNumerosDesordenados()
+        {
+            List<int> numerosDesordenados = new List<int>();
+            Random r = new Random();
+
+            for (int i = 0; i <= 3; i++)
+            {
+                int valor = r.Next(1, 5);
+
+                numerosDesordenados.Add(valor);
+            }
+
+            return numerosDesordenados;
+        }
+
+        public Boolean verificarNumerosOrdenados(List<int> numeros)
+        {
+            for (int i = 0; i < numeros.Count; i++)
+            {
+                if (numeros[i] > numeros[i + 1])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
