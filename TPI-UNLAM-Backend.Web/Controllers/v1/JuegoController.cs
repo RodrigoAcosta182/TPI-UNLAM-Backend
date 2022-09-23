@@ -38,6 +38,18 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _juegoServicio.validarStringIguales(campo1, campo2);
         }
 
+        [HttpGet("api/v1/getNumerosDesordenados")]
+        public ActionResult<List<int>> GetNumerosDesordenados() 
+        {
+            return _juegoServicio.getNumerosDesordenados();
+        }
+        
+        [HttpPost("api/v1/VerificarNumerosOrdenados")]
+        public bool VerificiarNumerosOrdenados(List<int> numeros)
+        {
+            return _juegoServicio.verificarNumerosOrdenados(numeros);
+        }
+
         [HttpPost("api/v1/FinalizarJuego")]
         public void FinalizarJuego(ProgresosXusuarioXjuego juego)
         {
