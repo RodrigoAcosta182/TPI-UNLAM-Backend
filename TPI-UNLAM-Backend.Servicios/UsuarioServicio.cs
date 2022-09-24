@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.SecurityTokenService;
+﻿using ArPortalTurnos.Models;
+using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,10 +17,12 @@ namespace TPI_UNLAM_Backend.Servicios
     public class UsuarioServicio : IUsuarioServicio
     {
         private IUsuarioRepositorio _userRepo;
+        private IAppSharedFunction _appSharedFunction;
 
-        public UsuarioServicio(IUsuarioRepositorio userRepo)
+        public UsuarioServicio(IUsuarioRepositorio userRepo, IAppSharedFunction appSharedFunction)
         {
             _userRepo = userRepo;
+            _appSharedFunction = appSharedFunction;
         }
 
         public string AgregarUsuario(Usuario usuario)
@@ -85,6 +88,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 if (usuario.Contrasena != loginDto.contrasena)
                     throw new BadRequestException("Mail o clave incorrecta");
 
+                UserTokenDto token = _appSharedFunction.BuildTokenUsuario(loginDto.email, loginDto.contrasena);
                 return usuario;
             }
             catch (Exception)
