@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.SecurityTokenService;
+﻿using ArPortalTurnos.Models;
+using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,10 +17,12 @@ namespace TPI_UNLAM_Backend.Servicios
     public class UsuarioServicio : IUsuarioServicio
     {
         private IUsuarioRepositorio _userRepo;
- 
-        public UsuarioServicio(IUsuarioRepositorio userRepo)
+        private IAppSharedFunction _appSharedFunction;
+
+        public UsuarioServicio(IUsuarioRepositorio userRepo, IAppSharedFunction appSharedFunction)
         {
             _userRepo = userRepo;
+            _appSharedFunction = appSharedFunction;
         }
 
         public string AgregarUsuario(Usuario usuario)
@@ -68,7 +71,7 @@ namespace TPI_UNLAM_Backend.Servicios
             return _userRepo.getUsuarioByEmail(email);
         }
 
-        public Usuario Login(LoginDto loginDto)
+        public UsuarioDto Login(LoginDto loginDto)
         {
             try
             {
@@ -76,6 +79,7 @@ namespace TPI_UNLAM_Backend.Servicios
                     throw new BadRequestException("Los datos ingresados incorrectos");
 
                 Usuario usuario = new Usuario();
+                UsuarioDto usuarioDto = new UsuarioDto();
 
                 usuario = _userRepo.getUsuarioByEmail(loginDto.email);
 
@@ -85,7 +89,12 @@ namespace TPI_UNLAM_Backend.Servicios
                 if (usuario.Contrasena != loginDto.contrasena)
                     throw new BadRequestException("Mail o clave incorrecta");
 
-                return usuario;
+                UserTokenDto token = _appSharedFunction.BuildTokenUsuario(loginDto.email, loginDto.contrasena);
+
+                usuarioDto.usuario = usuario;
+                usuarioDto.token = token;
+
+                return usuarioDto;
             }
             catch (Exception)
             {

@@ -19,7 +19,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
 
 
         [HttpPost("api/v1/auth")]
-        public Usuario Login([FromBody] LoginDto loginDto)
+        public UsuarioDto Login([FromBody] LoginDto loginDto)
         {
            return _usuarioServicio.Login(loginDto);
         }

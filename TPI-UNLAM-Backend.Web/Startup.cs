@@ -1,22 +1,20 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using TIP_UNLAM_Backend.Data;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
+
 
 namespace TPI_UNLAM_Backend
 {
@@ -34,7 +32,7 @@ namespace TPI_UNLAM_Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddHttpContextAccessor(); //Para poder acceder al contexto dentro de una clase
 
             services.AddControllers();
             services.AddTransient<TPI_UNLAM_DB_Context>();
@@ -44,9 +42,42 @@ namespace TPI_UNLAM_Backend
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IUsuarioXUsuarioServicio, UsuarioXUsuarioServicio>();
             services.AddScoped<IUsuarioXUsuarioRepositorio, UsuarioXUsuarioRepositorio>();
+            services.AddSingleton<IAppSharedFunction, AppSharedFunction>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Configuration["jwt:key"])),
+                ClockSkew = TimeSpan.Zero
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Token usar Bearer {token}",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                     new OpenApiSecurityScheme
+                     {
+                       Reference = new OpenApiReference
+                       {
+                         Type = ReferenceType.SecurityScheme,
+                         Id = "Bearer"
+                       }
+                      },
+                      new string[] { }
+                    }});
             });
 
             //agrego servicio de CORS
@@ -80,6 +111,7 @@ namespace TPI_UNLAM_Backend
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
