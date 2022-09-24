@@ -56,6 +56,12 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _juegoServicio.FinalizarJuego(juego);
         }
 
+        [HttpGet("api/v1/getImagenesDeJuegos")]
+        public ActionResult<string> GetNumerosDesordenados(int juegoId)
+        {
+            return _juegoServicio.getJuegoById(juegoId).ToString();
+        }
+
 
 
 

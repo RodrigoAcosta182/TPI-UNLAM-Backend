@@ -13,6 +13,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public Juego getJuegoById(int idJuego);
         public List<Colore> getAllColores();
         public void FinalizarJuego(ProgresosXusuarioXjuego juego);
+        public string getImagenPorJuego(int juegoId);
         public void SaveChanges();
     }
 }

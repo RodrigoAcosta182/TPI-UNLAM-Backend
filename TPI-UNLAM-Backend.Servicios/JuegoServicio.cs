@@ -111,5 +111,24 @@ namespace TPI_UNLAM_Backend.Servicios
             }
             return estado;
         }
+
+        public string getImagenPorJuego(int juegoId)
+        {
+            try
+            {
+                if (juegoId == null)
+                    throw new BadRequestException("El id del juego es nulo");
+
+                if (_juegoRepo.getImagenPorJuego(juegoId) == null)
+                    throw new BadRequestException("No hay cargada imagenes");
+
+                return _juegoRepo.getImagenPorJuego(juegoId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            
+        }
     }
 }
