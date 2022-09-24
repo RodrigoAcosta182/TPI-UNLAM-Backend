@@ -17,6 +17,7 @@ namespace TIP_UNLAM_Backend.Data.EF
         public string Descripcion { get; set; }
         public string Ruta { get; set; }
         public bool Activo { get; set; }
+        public string Imagen { get; set; }
 
         public virtual ICollection<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }
     }

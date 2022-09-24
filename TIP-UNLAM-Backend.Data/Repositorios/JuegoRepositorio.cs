@@ -32,6 +32,11 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             _ctx.Add(juego);
         }
 
+        public string getImagenPorJuego(int juegoId)
+        {
+            return _ctx.Juegos.Where(x => x.Id == juegoId).Select(y => y.Imagen).ToString();
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();
