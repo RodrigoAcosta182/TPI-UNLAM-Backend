@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
@@ -41,6 +42,8 @@ namespace TPI_UNLAM_Backend
             services.AddScoped<IJuegoRepositorio, JuegoRepositorio>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioXUsuarioServicio, UsuarioXUsuarioServicio>();
+            services.AddScoped<IUsuarioXUsuarioRepositorio, UsuarioXUsuarioRepositorio>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TPI_UNLAM_Backend", Version = "v1" });
