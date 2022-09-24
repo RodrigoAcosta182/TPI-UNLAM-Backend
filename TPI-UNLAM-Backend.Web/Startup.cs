@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
@@ -45,6 +46,8 @@ namespace TPI_UNLAM_Backend
             services.AddScoped<IJuegoRepositorio, JuegoRepositorio>();
             services.AddScoped<IUsuarioServicio, UsuarioServicio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioXUsuarioServicio, UsuarioXUsuarioServicio>();
+            services.AddScoped<IUsuarioXUsuarioRepositorio, UsuarioXUsuarioRepositorio>();
             services.AddSingleton<IAppSharedFunction, AppSharedFunction>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

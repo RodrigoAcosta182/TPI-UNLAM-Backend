@@ -15,5 +15,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public bool validarStringIguales(string campo1, string campo2);
         public void FinalizarJuego(ProgresosXusuarioXjuego juego);
         public void SaveChanges();
+        public List<int> getNumerosDesordenados();
+        public Boolean verificarNumerosOrdenados(List<int> numeros);
     }
 }
