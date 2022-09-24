@@ -71,7 +71,7 @@ namespace TPI_UNLAM_Backend.Servicios
             return _userRepo.getUsuarioByEmail(email);
         }
 
-        public Usuario Login(LoginDto loginDto)
+        public UsuarioDto Login(LoginDto loginDto)
         {
             try
             {
@@ -79,6 +79,7 @@ namespace TPI_UNLAM_Backend.Servicios
                     throw new BadRequestException("Los datos ingresados incorrectos");
 
                 Usuario usuario = new Usuario();
+                UsuarioDto usuarioDto = new UsuarioDto();
 
                 usuario = _userRepo.getUsuarioByEmail(loginDto.email);
 
@@ -89,7 +90,11 @@ namespace TPI_UNLAM_Backend.Servicios
                     throw new BadRequestException("Mail o clave incorrecta");
 
                 UserTokenDto token = _appSharedFunction.BuildTokenUsuario(loginDto.email, loginDto.contrasena);
-                return usuario;
+
+                usuarioDto.usuario = usuario;
+                usuarioDto.token = token;
+
+                return usuarioDto;
             }
             catch (Exception)
             {
