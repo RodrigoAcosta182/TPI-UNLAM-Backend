@@ -89,10 +89,10 @@ namespace TPI_UNLAM_Backend.Servicios
                 if (usuario.Contrasena != loginDto.contrasena)
                     throw new BadRequestException("Mail o clave incorrecta");
 
-                UserTokenDto token = _appSharedFunction.BuildTokenUsuario(loginDto.email, loginDto.contrasena);
+                UserTokenDto tokenDto = _appSharedFunction.BuildTokenUsuario(loginDto.email, loginDto.contrasena);
 
                 usuarioDto.usuario = usuario;
-                usuarioDto.token = token;
+                usuarioDto.token = tokenDto.Token;
 
                 return usuarioDto;
             }
