@@ -16,7 +16,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public void FinalizarJuego(ProgresosXusuarioXjuego juego);
         public void SaveChanges();
         public List<int> getNumerosDesordenados();
-        public string getImagenPorJuego(int juegoId);
+        public string getImagenPorJuego(string codigo);
         public Boolean verificarNumerosOrdenados(List<int> numeros);
     }
 }
