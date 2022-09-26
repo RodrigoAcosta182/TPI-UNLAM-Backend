@@ -56,15 +56,17 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _juegoServicio.FinalizarJuego(juego);
         }
 
-        [HttpGet("api/v1/getImagenesDeJuegos")]
-        public ActionResult<string> GetNumerosDesordenados(int juegoId)
+        [HttpGet("api/v1/getImagenesPorJuego")]
+        public ActionResult<string> GetImagenPorJuego(string codigo)
         {
-            return _juegoServicio.getJuegoById(juegoId).ToString();
+            return _juegoServicio.getImagenPorJuego(codigo);
         }
 
-
-
-
+        [HttpGet("api/v1/getJuegoByIds")]
+        public ActionResult<Juego> getJuegoById(int idJuego)
+        {
+            return _juegoServicio.getJuegoById(idJuego);
+        }
 
     }
 }

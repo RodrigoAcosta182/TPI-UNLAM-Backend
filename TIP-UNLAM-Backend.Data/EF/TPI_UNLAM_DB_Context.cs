@@ -29,10 +29,7 @@ namespace TIP_UNLAM_Backend.Data.EF
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-
                 optionsBuilder.UseSqlServer("Server=DESKTOP-TT83BPI;Database=TPI_UNLAM_DB_;Integrated Security=True;Trusted_Connection=True;");
-                //optionsbuilder.usesqlserver("server=desktop-tt83bpi;database=tpi_unlam_db_;integrated security=true;trusted_connection=true;"); //emi
-
             }
         }
 
@@ -55,6 +52,9 @@ namespace TIP_UNLAM_Backend.Data.EF
 
             modelBuilder.Entity<Juego>(entity =>
             {
+                entity.HasIndex(e => e.Codigo, "codigo")
+                    .IsUnique();
+
                 entity.Property(e => e.Codigo)
                     .IsRequired()
                     .HasMaxLength(50)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,17 +113,26 @@ namespace TPI_UNLAM_Backend.Servicios
             return estado;
         }
 
-        public string getImagenPorJuego(int juegoId)
+        public string getImagenPorJuego(string codigo)
         {
+            const string carpeta = @"\Content\imagenes\";
             try
             {
-                if (juegoId == null)
-                    throw new BadRequestException("El id del juego es nulo");
+                if (codigo == null)
+                    throw new BadRequestException("El campo codigo es nulo");
 
-                if (_juegoRepo.getImagenPorJuego(juegoId) == null)
-                    throw new BadRequestException("No hay cargada imagenes");
+                Juego game = _juegoRepo.getImagenPorJuego(codigo);
 
-                return _juegoRepo.getImagenPorJuego(juegoId);
+                if (game == null)
+                    throw new BadRequestException("No existe codigo");
+
+                if (game.Imagen == null)
+                    throw new BadRequestException("No existe ruta para el juego");
+
+                if (!Directory.Exists(Path.GetDirectoryName(carpeta)))
+                   Directory.CreateDirectory(Path.GetDirectoryName(carpeta));
+
+                return game.Imagen;
             }
             catch (Exception e)
             {
