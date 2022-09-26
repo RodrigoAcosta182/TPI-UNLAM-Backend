@@ -86,12 +86,19 @@ namespace TPI_UNLAM_Backend.Servicios
             List<int> numerosDesordenados = new List<int>();
             Random r = new Random();
 
-            for (int i = 0; i <= 3; i++)
-            {
-                int valor = r.Next(1, 5);
 
-                numerosDesordenados.Add(valor);
-            }
+            do
+            {
+                for (int i = 0; i <= 3; i++)
+                {
+                    int valor = r.Next(1, 5);
+
+                    if (!numerosDesordenados.Contains(valor))
+                    {
+                        numerosDesordenados.Add(valor);
+                    }
+                }
+            } while (numerosDesordenados.Count < 4);
 
             return numerosDesordenados;
         }
