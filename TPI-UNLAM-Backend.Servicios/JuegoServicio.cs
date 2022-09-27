@@ -106,15 +106,20 @@ namespace TPI_UNLAM_Backend.Servicios
         public Boolean verificarNumerosOrdenados(List<int> numeros)
         {
             bool estado = false;
-            for (int i = 0; i < numeros.Count; i++)
+            for (int i = 0; i <= numeros.Count; i++)
             {
-                if (numeros[i] > numeros[i + 1])
+                if(i == 3)
+                {
+                    return estado;
+                }
+                if (numeros[i] < numeros[i + 1])
                 {
                     estado = true;
                 }
                 else
                 {
                     estado = false;
+                    return estado;
                 }
             }
             return estado;
