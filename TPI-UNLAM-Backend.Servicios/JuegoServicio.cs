@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
@@ -15,14 +16,16 @@ namespace TPI_UNLAM_Backend.Servicios
     {
         private IJuegoRepositorio _juegoRepo;
         private IUsuarioRepositorio _userRepo;
+        private IAppSharedFunction _appSharedFunction;
 
-        public JuegoServicio(IJuegoRepositorio juegoRepo, IUsuarioRepositorio userRepo)
+        public JuegoServicio(IJuegoRepositorio juegoRepo, IUsuarioRepositorio userRepo, IAppSharedFunction appSharedFunction)
         {
             _juegoRepo = juegoRepo;
             _userRepo = userRepo;
+            _appSharedFunction = appSharedFunction;
         }
 
-        public void FinalizarJuego(ProgresosXusuarioXjuego juego)
+        public void FinalizarJuego(ResultadoJuegoDto juego)
         {
             if (juego == null)
                 throw new BadRequestException("No se enviaron los campos");
@@ -30,11 +33,25 @@ namespace TPI_UNLAM_Backend.Servicios
             if (_juegoRepo.getJuegoById(juego.JuegoId) == null)
                 throw new BadRequestException("No existe juego");
 
-            if (_userRepo.getUsuarioById(juego.UsuarioId) == null)
+            string email = _appSharedFunction.GetUsuarioPorToken();
+
+            if (_userRepo.getUsuarioByEmail(email) == null)
                 throw new BadRequestException("No existe usuario");
+
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+
+            juego.FechaInicio = DateTime.Now;
             juego.FechaFinalizacion = DateTime.Now;
 
-            _juegoRepo.FinalizarJuego(juego);
+            ProgresosXusuarioXjuego ProgresoObj = new ProgresosXusuarioXjuego();
+
+            ProgresoObj.FechaFinalizacion = juego.FechaFinalizacion;
+            ProgresoObj.FechaInicio = juego.FechaInicio;
+            ProgresoObj.JuegoId = juego.JuegoId;
+            ProgresoObj.UsuarioId = usuario.Id;
+            ProgresoObj.Finalizado = juego.Finalizado;
+
+            _juegoRepo.FinalizarJuego(ProgresoObj);
             _juegoRepo.SaveChanges();
         }
 
