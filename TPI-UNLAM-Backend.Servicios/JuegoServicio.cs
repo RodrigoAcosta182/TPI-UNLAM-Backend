@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,12 +86,19 @@ namespace TPI_UNLAM_Backend.Servicios
             List<int> numerosDesordenados = new List<int>();
             Random r = new Random();
 
-            for (int i = 0; i <= 3; i++)
-            {
-                int valor = r.Next(1, 5);
 
-                numerosDesordenados.Add(valor);
-            }
+            do
+            {
+                for (int i = 0; i <= 3; i++)
+                {
+                    int valor = r.Next(1, 5);
+
+                    if (!numerosDesordenados.Contains(valor))
+                    {
+                        numerosDesordenados.Add(valor);
+                    }
+                }
+            } while (numerosDesordenados.Count < 4);
 
             return numerosDesordenados;
         }
@@ -98,31 +106,45 @@ namespace TPI_UNLAM_Backend.Servicios
         public Boolean verificarNumerosOrdenados(List<int> numeros)
         {
             bool estado = false;
-            for (int i = 0; i < numeros.Count; i++)
+            for (int i = 0; i <= numeros.Count; i++)
             {
-                if (numeros[i] > numeros[i + 1])
+                if(i == 3)
+                {
+                    return estado;
+                }
+                if (numeros[i] < numeros[i + 1])
                 {
                     estado = true;
                 }
                 else
                 {
                     estado = false;
+                    return estado;
                 }
             }
             return estado;
         }
 
-        public string getImagenPorJuego(int juegoId)
+        public string getImagenPorJuego(string codigo)
         {
+            const string carpeta = @"\Content\imagenes\";
             try
             {
-                if (juegoId == null)
-                    throw new BadRequestException("El id del juego es nulo");
+                if (codigo == null)
+                    throw new BadRequestException("El campo codigo es nulo");
 
-                if (_juegoRepo.getImagenPorJuego(juegoId) == null)
-                    throw new BadRequestException("No hay cargada imagenes");
+                Juego game = _juegoRepo.getImagenPorJuego(codigo);
 
-                return _juegoRepo.getImagenPorJuego(juegoId);
+                if (game == null)
+                    throw new BadRequestException("No existe codigo");
+
+                if (game.Imagen == null)
+                    throw new BadRequestException("No existe ruta para el juego");
+
+                if (!Directory.Exists(Path.GetDirectoryName(carpeta)))
+                   Directory.CreateDirectory(Path.GetDirectoryName(carpeta));
+
+                return game.Imagen;
             }
             catch (Exception e)
             {

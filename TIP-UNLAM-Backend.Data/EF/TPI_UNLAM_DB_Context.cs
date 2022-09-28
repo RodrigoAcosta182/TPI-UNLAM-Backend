@@ -56,6 +56,9 @@ namespace TIP_UNLAM_Backend.Data.EF
 
             modelBuilder.Entity<Juego>(entity =>
             {
+                entity.HasIndex(e => e.Codigo, "codigo")
+                    .IsUnique();
+
                 entity.Property(e => e.Codigo)
                     .IsRequired()
                     .HasMaxLength(50)
