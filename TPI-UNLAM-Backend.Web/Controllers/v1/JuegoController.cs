@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Controllers.v1
 {
+    [ApiController]
     public class JuegoController : Controller
     {
 
@@ -13,11 +15,6 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         public JuegoController(IJuegoServicio juegoServicio)
         {
             _juegoServicio = juegoServicio;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         [HttpGet("api/v1/getAllJuegos")]
@@ -51,7 +48,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         }
 
         [HttpPost("api/v1/FinalizarJuego")]
-        public void FinalizarJuego(ProgresosXusuarioXjuego juego)
+        public void FinalizarJuego([FromBody]ResultadoJuegoDto juego)
         {
             _juegoServicio.FinalizarJuego(juego);
         }
