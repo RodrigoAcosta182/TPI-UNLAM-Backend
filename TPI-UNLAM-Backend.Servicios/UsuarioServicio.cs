@@ -157,5 +157,31 @@ namespace TPI_UNLAM_Backend.Servicios
 
             return user;
         }
+
+        public void modificarUsuario(Usuario usuario)
+        {
+            Usuario usuarioModificado = getUsuarioById(usuario.Id);
+
+            if (usuario.Nombre != null)
+            {
+                usuarioModificado.Nombre = usuario.Nombre;
+            }
+
+            if (usuario.Apellido != null)
+            {
+                usuarioModificado.Apellido = usuario.Apellido;
+            }
+
+            if (usuario.Contrasena != null)
+            {
+                usuarioModificado.Contrasena = usuario.Contrasena;
+            }
+            if (usuario.Mail != null)
+            {
+                usuarioModificado.Mail = usuario.Mail;
+            }
+
+            _userRepo.SaveChanges();
+        }
     }
 }
