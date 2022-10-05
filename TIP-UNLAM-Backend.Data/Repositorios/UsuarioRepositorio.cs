@@ -36,5 +36,10 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             return _ctx.Usuarios.Find(id);
         }
+
+        /*public void modificarUsuario(Usuario usuario)
+        {
+
+        }*/
     }
 }

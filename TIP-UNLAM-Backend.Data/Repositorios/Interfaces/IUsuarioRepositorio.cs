@@ -13,5 +13,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public Usuario getUsuarioByEmail(string email);
         public void SaveChanges();
         public Usuario getUsuarioById(int id);
+        //public void modificarUsuario(Usuario usuario);
     }
 }
