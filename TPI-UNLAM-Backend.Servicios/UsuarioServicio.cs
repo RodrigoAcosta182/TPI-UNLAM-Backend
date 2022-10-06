@@ -162,24 +162,10 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             Usuario usuarioModificado = getUsuarioById(usuario.Id);
 
-            if (usuario.Nombre != null)
-            {
-                usuarioModificado.Nombre = usuario.Nombre;
-            }
-
-            if (usuario.Apellido != null)
-            {
-                usuarioModificado.Apellido = usuario.Apellido;
-            }
-
-            if (usuario.Contrasena != null)
-            {
-                usuarioModificado.Contrasena = usuario.Contrasena;
-            }
-            if (usuario.Mail != null)
-            {
-                usuarioModificado.Mail = usuario.Mail;
-            }
+            usuarioModificado.Nombre = usuario.Nombre;
+            usuarioModificado.Apellido = usuario.Apellido;
+            usuarioModificado.Contrasena = usuario.Contrasena;
+            usuarioModificado.Mail = usuario.Mail;
 
             _userRepo.SaveChanges();
         }
