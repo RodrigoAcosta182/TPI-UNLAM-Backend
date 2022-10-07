@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using TPI_UNLAM_Backend.Utils;
 
 #nullable disable
 
@@ -32,7 +33,7 @@ namespace TIP_UNLAM_Backend.Data.EF
 
                 //optionsbuilder.usesqlserver("server=desktop-tt83bpi;database=tpi_unlam_db_;integrated security=true;trusted_connection=true;"); //emi
                 //optionsBuilder.UseSqlServer("Server=DIOXIS\\SQLEXPRESS;Database=TPI_UNLAM_DB_;Integrated Security=True;Trusted_Connection=True;");
-                optionsBuilder.UseSqlServer("Server=DESKTOP-65DV8AP;Database=TPI_UNLAM_DB_;Integrated Security=True;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(Configuraciones.ConexionDB);
             }
         }
 
