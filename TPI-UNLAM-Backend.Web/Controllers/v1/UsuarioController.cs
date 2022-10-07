@@ -22,7 +22,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _userService.getPacienteXProfesional(usuarioLogueado);
         }
 
-        [HttpGet("api/v1/MisPacientes")]
+        [HttpGet("api/v1/GetAllProfesionales")]
         public ActionResult<List<Usuario>> getAllProfesionales()
         {
             return _userServi.getAllUsuariosProfesionales();
