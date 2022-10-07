@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TPI-UNLAM-Backend.Utils\TPI-UNLAM-Backend.Utils.csproj" />
+  </ItemGroup>
+
 </Project>
