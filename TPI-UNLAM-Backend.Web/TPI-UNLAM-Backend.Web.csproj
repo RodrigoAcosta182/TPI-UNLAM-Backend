@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TIP-UNLAM-Backend.Data\TIP-UNLAM-Backend.Data.csproj" />
     <ProjectReference Include="..\TPI-UNLAM-Backend.Servicios\TPI-UNLAM-Backend.Servicios.csproj" />
+    <ProjectReference Include="..\TPI-UNLAM-Backend.Utils\TPI-UNLAM-Backend.Utils.csproj" />
   </ItemGroup>
 
 </Project>

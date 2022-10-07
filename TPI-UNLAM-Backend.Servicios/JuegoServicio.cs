@@ -102,8 +102,6 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             List<int> numerosDesordenados = new List<int>();
             Random r = new Random();
-
-
             do
             {
                 for (int i = 0; i <= 3; i++)
