@@ -16,5 +16,6 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public UsuarioDto Login(LoginDto loginDto);
         public void SaveChanges();
         public void modificarUsuario(Usuario usuario);
+        public List<Usuario> getAllUsuariosProfesionales();
     }
 }

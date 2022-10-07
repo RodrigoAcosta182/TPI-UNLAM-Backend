@@ -61,6 +61,11 @@ namespace TPI_UNLAM_Backend.Servicios
            
         }
 
+        public List<Usuario> getAllUsuariosProfesionales()
+        {
+            return _userRepo.getAllUsuariosProfesionales();
+        }
+
         public void SaveChanges()
         {
             _userRepo.SaveChanges();

@@ -21,5 +21,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         {
             _usuarioServicio.AgregarUsuario(usuario);
         }
+
+
     }
 }
