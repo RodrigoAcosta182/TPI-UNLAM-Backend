@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 
@@ -41,9 +42,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional" && x.Activo == true).ToList();
         }
-        /*public void modificarUsuario(Usuario usuario)
-        {
 
-        }*/
     }
 }

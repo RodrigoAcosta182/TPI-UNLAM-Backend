@@ -12,5 +12,6 @@ namespace TIP_UNLAM_Backend.Data.Dto
     {
         public Usuario usuario { get; set; }
         public string token { get; set; }
+        public int usuarioProfesionalId { get; set; }
     }
 }

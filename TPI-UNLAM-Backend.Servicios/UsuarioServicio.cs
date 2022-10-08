@@ -17,40 +17,59 @@ namespace TPI_UNLAM_Backend.Servicios
     public class UsuarioServicio : IUsuarioServicio
     {
         private IUsuarioRepositorio _userRepo;
+        private IUsuarioXUsuarioRepositorio _userXUsuarioRepo;
+
         private IAppSharedFunction _appSharedFunction;
 
-        public UsuarioServicio(IUsuarioRepositorio userRepo, IAppSharedFunction appSharedFunction)
+        public UsuarioServicio(IUsuarioRepositorio userRepo, IAppSharedFunction appSharedFunction, IUsuarioXUsuarioRepositorio userXUsuarioRepo)
         {
             _userRepo = userRepo;
             _appSharedFunction = appSharedFunction;
+            _userXUsuarioRepo = userXUsuarioRepo;
         }
 
-        public string AgregarUsuario(Usuario usuario)
+        public string AgregarUsuario(UsuarioDto usuario)
         {
+            
             try
             {
-                if (getUsuarioByEmail(usuario.Mail) != null)
+                Usuario userNuevo = new Usuario();
+
+                if (getUsuarioByEmail(usuario.usuario.Mail) != null)
                     throw new BadRequestException("Ya existe el usuario");
 
-                if (ContrasenaSegura(usuario.Contrasena) == false)
+                if (ContrasenaSegura(usuario.usuario.Contrasena) == false)
                     throw new BadRequestException("Verificar que la clave tenga un minimo de 8 caracteres, al menos tenga un caracter, un numero y un caracter especial");
 
-                if (ValidateEmail(usuario.Mail) == false)
+                if (ValidateEmail(usuario.usuario.Mail) == false)
                     throw new BadRequestException("El mail no es valido");
 
-                usuario.FechaAlta = DateTime.Now;
-                usuario.Activo = true;
+                userNuevo.Mail = usuario.usuario.Mail;
+                userNuevo.Contrasena = usuario.usuario.Contrasena;
+                userNuevo.FechaAlta = DateTime.Now;
+                userNuevo.FechaNacimiento = usuario.usuario.FechaNacimiento;
+                userNuevo.Activo = true;
+                userNuevo.Nombre = usuario.usuario.Nombre;
+                userNuevo.Apellido = usuario.usuario.Apellido;
+                userNuevo.Dni = usuario.usuario.Dni;
 
-                if (String.IsNullOrEmpty(usuario.Matricula))
+
+
+                if (String.IsNullOrEmpty(usuario.usuario.Matricula))
                 {
-                    usuario.TipoUsuarioId = 1;
+                    userNuevo.TipoUsuarioId = 1;
+                    Usuario usuarioPro = getUsuarioById(usuario.usuarioProfesionalId);
+
+                    if (usuarioPro == null)
+                        throw new BadRequestException("El usuario del Profesional no se encuentra en nuestra lista");
+                    //Aca hay que hacer el envio de mail al profesional
                 }
                 else
                 {
-                    usuario.TipoUsuarioId = 2;
+                    userNuevo.TipoUsuarioId = 2;
                 }
 
-                _userRepo.AgregarUsuario(usuario);
+                _userRepo.AgregarUsuario(userNuevo);
                 _userRepo.SaveChanges();
                 return "El usuario se registro correctamente"; ;
             }
@@ -61,9 +80,25 @@ namespace TPI_UNLAM_Backend.Servicios
            
         }
 
+        public void modificarUsuario(Usuario usuario)
+        {
+            Usuario usuarioModificado = getUsuarioById(usuario.Id);
+
+            usuarioModificado.Nombre = usuario.Nombre;
+            usuarioModificado.Apellido = usuario.Apellido;
+            usuarioModificado.Contrasena = usuario.Contrasena;
+            usuarioModificado.Mail = usuario.Mail;
+
+            _userRepo.SaveChanges();
+        }
+
         public List<Usuario> getAllUsuariosProfesionales()
         {
             return _userRepo.getAllUsuariosProfesionales();
+        }
+        public Usuario getUsuarioByEmail(string email)
+        {
+            return _userRepo.getUsuarioByEmail(email);
         }
 
         public void SaveChanges()
@@ -71,10 +106,6 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo.SaveChanges();
         }
 
-        public Usuario getUsuarioByEmail(string email)
-        {
-            return _userRepo.getUsuarioByEmail(email);
-        }
 
         public UsuarioDto Login(LoginDto loginDto)
         {
@@ -107,6 +138,23 @@ namespace TPI_UNLAM_Backend.Servicios
             }
           
         }
+
+        
+
+        public Usuario getUsuarioById(int id)
+        {
+            if (id == null)
+                throw new BadRequestException("Los datos ingresados incorrectos");
+
+            Usuario user = _userRepo.getUsuarioById(id);
+
+            if (user == null)
+                throw new BadRequestException("No existe Usuario");
+
+            return user;
+        }
+
+       
 
         private Boolean ValidateEmail(String email)
         {
@@ -148,31 +196,6 @@ namespace TPI_UNLAM_Backend.Servicios
 
             //si cumple con todo, regresa true
             return true;
-        }
-
-        public Usuario getUsuarioById(int id)
-        {
-            if (id == null)
-                throw new BadRequestException("Los datos ingresados incorrectos");
-
-            Usuario user = _userRepo.getUsuarioById(id);
-
-            if (user == null)
-                throw new BadRequestException("No existe Usuario");
-
-            return user;
-        }
-
-        public void modificarUsuario(Usuario usuario)
-        {
-            Usuario usuarioModificado = getUsuarioById(usuario.Id);
-
-            usuarioModificado.Nombre = usuario.Nombre;
-            usuarioModificado.Apellido = usuario.Apellido;
-            usuarioModificado.Contrasena = usuario.Contrasena;
-            usuarioModificado.Mail = usuario.Mail;
-
-            _userRepo.SaveChanges();
         }
     }
 }
