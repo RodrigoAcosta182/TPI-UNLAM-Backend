@@ -13,6 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
@@ -20,6 +21,10 @@
     <ProjectReference Include="..\TIP-UNLAM-Backend.Data\TIP-UNLAM-Backend.Data.csproj" />
     <ProjectReference Include="..\TPI-UNLAM-Backend.Servicios\TPI-UNLAM-Backend.Servicios.csproj" />
     <ProjectReference Include="..\TPI-UNLAM-Backend.Utils\TPI-UNLAM-Backend.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
