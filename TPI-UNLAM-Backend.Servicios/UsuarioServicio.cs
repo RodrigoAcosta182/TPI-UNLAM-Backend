@@ -53,8 +53,6 @@ namespace TPI_UNLAM_Backend.Servicios
                 userNuevo.Apellido = usuario.usuario.Apellido;
                 userNuevo.Dni = usuario.usuario.Dni;
 
-
-
                 if (String.IsNullOrEmpty(usuario.usuario.Matricula))
                 {
                     userNuevo.TipoUsuarioId = 1;
