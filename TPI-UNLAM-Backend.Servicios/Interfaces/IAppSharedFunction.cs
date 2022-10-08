@@ -1,4 +1,4 @@
-﻿using ArPortalTurnos.Models;
+﻿using TPI_UNLAM_Backend.Models;
 
 namespace TPI_UNLAM_Backend.Servicios.Interfaces
 {

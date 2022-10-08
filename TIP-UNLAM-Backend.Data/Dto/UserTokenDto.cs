@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ArPortalTurnos.Models
+namespace TPI_UNLAM_Backend.Models
 {
     public class UserTokenDto
     {
