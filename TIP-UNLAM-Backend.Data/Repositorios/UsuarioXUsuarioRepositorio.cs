@@ -22,6 +22,13 @@ namespace TIP_UNLAM_Backend.Data
             return _ctx.UsuarioXusuarios.Where(x => x.UsuarioProfesionalId == UsuarioLogeadoId).ToList();
         }
 
-     
+        public void agregarRelacion(UsuarioXusuario usuarioxusuario)
+        {
+            _ctx.Add(usuarioxusuario);
+        }
+
+
+
+
     }
 }

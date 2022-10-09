@@ -62,6 +62,17 @@ namespace TPI_UNLAM_Backend.Servicios
                     if (usuarioPro == null)
                         throw new BadRequestException("El usuario del Profesional no se encuentra en nuestra lista");
                     //Aca hay que hacer el envio de mail al profesional
+
+                    UsuarioXusuario userxuser = new UsuarioXusuario();
+
+                    userxuser.UsuarioPacienteId = userNuevo.Id;
+                    userxuser.UsuarioProfesionalId = usuarioPro.Id;
+                    userxuser.FechaInicioRelacion = DateTime.Now;
+                    userxuser.FechaFinalizacionRelacion = null;
+                    userxuser.Activo = false;
+
+                    _userXUsuarioRepo.agregarRelacion(userxuser);
+
                 }
                 else
                 {
