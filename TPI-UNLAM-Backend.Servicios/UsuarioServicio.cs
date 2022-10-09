@@ -49,30 +49,16 @@ namespace TPI_UNLAM_Backend.Servicios
                 userNuevo.Contrasena = usuario.usuario.Contrasena;
                 userNuevo.FechaAlta = DateTime.Now;
                 userNuevo.FechaNacimiento = usuario.usuario.FechaNacimiento;
-                userNuevo.Activo = true;
+                userNuevo.Activo = false;
                 userNuevo.Nombre = usuario.usuario.Nombre;
                 userNuevo.Apellido = usuario.usuario.Apellido;
                 userNuevo.Dni = usuario.usuario.Dni;
-
+                userNuevo.Telefono = usuario.usuario.Telefono;
+               
                 if (String.IsNullOrEmpty(usuario.usuario.Matricula))
                 {
                     userNuevo.TipoUsuarioId = 1;
-                    Usuario usuarioPro = getUsuarioById(usuario.usuarioProfesionalId);
-
-                    if (usuarioPro == null)
-                        throw new BadRequestException("El usuario del Profesional no se encuentra en nuestra lista");
-                    //Aca hay que hacer el envio de mail al profesional
-
-                    UsuarioXusuario userxuser = new UsuarioXusuario();
-
-                    userxuser.UsuarioPacienteId = userNuevo.Id;
-                    userxuser.UsuarioProfesionalId = usuarioPro.Id;
-                    userxuser.FechaInicioRelacion = DateTime.Now;
-                    userxuser.FechaFinalizacionRelacion = null;
-                    userxuser.Activo = false;
-
-                    _userXUsuarioRepo.agregarRelacion(userxuser);
-
+                    userNuevo.NombreTutor = usuario.usuario.NombreTutor;
                 }
                 else
                 {
@@ -102,20 +88,29 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo.SaveChanges();
         }
 
-        public List<Usuario> getAllUsuariosProfesionales()
+        public void agregarRelacion(UsuarioDto usuario)
         {
-            return _userRepo.getAllUsuariosProfesionales();
-        }
-        public Usuario getUsuarioByEmail(string email)
-        {
-            return _userRepo.getUsuarioByEmail(email);
-        }
+            if (usuario.usuario.TipoUsuarioId == 1)
+            {
 
-        public void SaveChanges()
-        {
-            _userRepo.SaveChanges();
-        }
+                Usuario usuarioPro = getUsuarioById(usuario.usuarioProfesionalId);
+                string mailPaciente = _appSharedFunction.GetUsuarioPorToken();
 
+                Usuario paciente = _userRepo.getUsuarioByEmail(mailPaciente);
+
+                if (usuarioPro == null)
+                    throw new BadRequestException("El usuario del Profesional no se encuentra en nuestra lista");
+
+                UsuarioXusuario userxuser = new UsuarioXusuario();
+
+                userxuser.UsuarioPacienteId = paciente.Id;
+                userxuser.UsuarioProfesionalId = usuarioPro.Id;
+                userxuser.FechaInicioRelacion = null;
+                userxuser.FechaFinalizacionRelacion = null;
+                userxuser.Activo = false;
+                _userXUsuarioRepo.agregarRelacion(userxuser);
+            }
+        }
 
         public UsuarioDto Login(LoginDto loginDto)
         {
@@ -144,13 +139,31 @@ namespace TPI_UNLAM_Backend.Servicios
             }
             catch (Exception)
             {
-                throw new BadRequestException("Los datos ingresados incorrectos"); 
+                throw new BadRequestException("Los datos ingresados incorrectos");
             }
-          
+
         }
 
-        
+        public string HabilitarProfesional(int id)
+        {
+            Usuario profesinal = _userRepo.getUsuarioById(id);
+            profesinal.Activo = true;
 
+            _userRepo.SaveChanges();
+
+            return string.Format("El profesional {0} se ha habilitado correctamente", profesinal.Nombre);
+
+        }
+
+        #region Get
+        public List<Usuario> getAllUsuariosProfesionalesActivos()
+        {
+            return _userRepo.getAllUsuariosProfesionalesActivos();
+        }
+        public Usuario getUsuarioByEmail(string email)
+        {
+            return _userRepo.getUsuarioByEmail(email);
+        }
         public Usuario getUsuarioById(int id)
         {
             if (id == null)
@@ -164,8 +177,13 @@ namespace TPI_UNLAM_Backend.Servicios
             return user;
         }
 
-       
+        public List<Usuario> getAllUsuariosProfesionalesInactivos()
+        {
+            return _userRepo.getAllUsuariosProfesionalesInactivos();
+        }
+        #endregion
 
+        #region Validaciones
         private Boolean ValidateEmail(String email)
         {
             if (email == null)
@@ -207,5 +225,12 @@ namespace TPI_UNLAM_Backend.Servicios
             //si cumple con todo, regresa true
             return true;
         }
+        #endregion
+
+        public void SaveChanges()
+        {
+            _userRepo.SaveChanges();
+        }
+     
     }
 }

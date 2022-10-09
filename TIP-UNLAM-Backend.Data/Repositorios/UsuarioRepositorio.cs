@@ -38,10 +38,14 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
             return _ctx.Usuarios.Find(id);
         }
 
-        public List<Usuario> getAllUsuariosProfesionales()
+        public List<Usuario> getAllUsuariosProfesionalesActivos()
         {
             return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional" && x.Activo == true).ToList();
         }
 
+        public List<Usuario> getAllUsuariosProfesionalesInactivos()
+        {
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional" ).ToList();
+        }
     }
 }

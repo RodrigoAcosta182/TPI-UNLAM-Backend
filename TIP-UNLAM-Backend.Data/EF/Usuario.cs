@@ -25,6 +25,8 @@ namespace TIP_UNLAM_Backend.Data.EF
         public bool Activo { get; set; }
         public int TipoUsuarioId { get; set; }
         public string Mail { get; set; }
+        public string NombreTutor { get; set; }
+        public string Telefono { get; set; }
 
         public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual ICollection<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }

@@ -10,9 +10,9 @@ namespace TIP_UNLAM_Backend.Data.EF
         public int Id { get; set; }
         public int UsuarioPacienteId { get; set; }
         public int UsuarioProfesionalId { get; set; }
-        public DateTime FechaInicioRelacion { get; set; }
-        public DateTime? FechaFinalizacionRelacion { get; set; }
         public bool Activo { get; set; }
+        public DateTime? FechaFinalizacionRelacion { get; set; }
+        public DateTime? FechaInicioRelacion { get; set; }
 
         public virtual Usuario UsuarioPaciente { get; set; }
         public virtual Usuario UsuarioProfesional { get; set; }

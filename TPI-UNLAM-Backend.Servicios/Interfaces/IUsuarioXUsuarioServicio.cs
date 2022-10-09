@@ -10,5 +10,6 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     public interface IUsuarioXUsuarioServicio
     {
         public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId);
+        public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId);
     }
 }

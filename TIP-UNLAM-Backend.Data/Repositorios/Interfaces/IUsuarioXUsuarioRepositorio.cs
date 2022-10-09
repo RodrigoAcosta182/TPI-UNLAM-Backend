@@ -12,5 +12,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId);
 
         public void agregarRelacion(UsuarioXusuario usuarioxusuario);
+
+        public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId);
     }
 }

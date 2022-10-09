@@ -17,6 +17,10 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             _userXuser = userXuser;
         }
+        public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId)
+        {
+            return _userXuser.getPacienteXProfesionalInactivos(UsuarioLogeadoId).ToList();
+        }
 
         public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId)
         {
