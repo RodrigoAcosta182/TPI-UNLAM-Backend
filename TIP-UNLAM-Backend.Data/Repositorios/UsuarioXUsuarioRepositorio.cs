@@ -26,6 +26,12 @@ namespace TIP_UNLAM_Backend.Data
         {
             return _ctx.UsuarioXusuarios.Where(x => x.UsuarioProfesionalId == UsuarioLogeadoId && x.Activo == false).ToList();
         }
+
+        public List<UsuarioXusuario> getPacienteXProfesionalActivos(int UsuarioLogeadoId)
+        {
+            return _ctx.UsuarioXusuarios.Where(x => x.UsuarioProfesionalId == UsuarioLogeadoId && x.Activo == true).ToList();
+        }
+
         public void agregarRelacion(UsuarioXusuario usuarioxusuario)
         {
             _ctx.Add(usuarioxusuario);

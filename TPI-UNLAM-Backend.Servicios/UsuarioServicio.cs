@@ -31,7 +31,6 @@ namespace TPI_UNLAM_Backend.Servicios
 
         public string AgregarUsuario(UsuarioDto usuario)
         {
-            
             try
             {
                 Usuario userNuevo = new Usuario();
@@ -92,23 +91,20 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             if (usuario.usuario.TipoUsuarioId == 1)
             {
-
                 Usuario usuarioPro = getUsuarioById(usuario.usuarioProfesionalId);
-                string mailPaciente = _appSharedFunction.GetUsuarioPorToken();
-
-                Usuario paciente = _userRepo.getUsuarioByEmail(mailPaciente);
+                Usuario paciente = _userRepo.getUsuarioByEmail(usuario.usuario.Mail);
 
                 if (usuarioPro == null)
                     throw new BadRequestException("El usuario del Profesional no se encuentra en nuestra lista");
 
                 UsuarioXusuario userxuser = new UsuarioXusuario();
-
                 userxuser.UsuarioPacienteId = paciente.Id;
                 userxuser.UsuarioProfesionalId = usuarioPro.Id;
                 userxuser.FechaInicioRelacion = null;
                 userxuser.FechaFinalizacionRelacion = null;
                 userxuser.Activo = false;
                 _userXUsuarioRepo.agregarRelacion(userxuser);
+                _userRepo.SaveChanges();
             }
         }
 
@@ -144,10 +140,10 @@ namespace TPI_UNLAM_Backend.Servicios
 
         }
 
-        public string HabilitarProfesional(int id)
+        public string HabilitarProfesional(int id, bool estado)
         {
             Usuario profesinal = _userRepo.getUsuarioById(id);
-            profesinal.Activo = true;
+            profesinal.Activo = estado;
 
             _userRepo.SaveChanges();
 
@@ -155,33 +151,7 @@ namespace TPI_UNLAM_Backend.Servicios
 
         }
 
-        #region Get
-        public List<Usuario> getAllUsuariosProfesionalesActivos()
-        {
-            return _userRepo.getAllUsuariosProfesionalesActivos();
-        }
-        public Usuario getUsuarioByEmail(string email)
-        {
-            return _userRepo.getUsuarioByEmail(email);
-        }
-        public Usuario getUsuarioById(int id)
-        {
-            if (id == null)
-                throw new BadRequestException("Los datos ingresados incorrectos");
-
-            Usuario user = _userRepo.getUsuarioById(id);
-
-            if (user == null)
-                throw new BadRequestException("No existe Usuario");
-
-            return user;
-        }
-
-        public List<Usuario> getAllUsuariosProfesionalesInactivos()
-        {
-            return _userRepo.getAllUsuariosProfesionalesInactivos();
-        }
-        #endregion
+     
 
         #region Validaciones
         private Boolean ValidateEmail(String email)
@@ -227,10 +197,61 @@ namespace TPI_UNLAM_Backend.Servicios
         }
         #endregion
 
+        #region Get
+
+        public List<Usuario> getAllUsuariosProfesionales()
+        {
+            return _userRepo.getAllUsuariosProfesionales();
+        }
+
+        public List<Usuario> getAllUsuariosProfesionalesActivos()
+        {
+            return _userRepo.getAllUsuariosProfesionalesActivos();
+        }
+
+        public List<Usuario> getAllUsuariosProfesionalesInactivos()
+        {
+            return _userRepo.getAllUsuariosProfesionalesInactivos();
+        }
+
+        public List<Usuario> getAllUsuariosPacientesActivos()
+        {
+            return _userRepo.getAllUsuariosPacientesActivos();
+        }
+
+        public List<Usuario> getAllUsuariosPacientesInactivos()
+        {
+            return _userRepo.getAllUsuariosPacientesInactivos();
+        }
+
+        public List<Usuario> getAllUsuariosPacientes()
+        {
+            return _userRepo.getAllUsuariosPacientes();
+        }
+        public Usuario getUsuarioByEmail(string email)
+        {
+            return _userRepo.getUsuarioByEmail(email);
+        }
+        public Usuario getUsuarioById(int id)
+        {
+            if (id == null)
+                throw new BadRequestException("Los datos ingresados incorrectos");
+
+            Usuario user = _userRepo.getUsuarioById(id);
+
+            if (user == null)
+                throw new BadRequestException("No existe Usuario");
+
+            return user;
+        }
+
+        #endregion
+
         public void SaveChanges()
         {
             _userRepo.SaveChanges();
         }
+
      
     }
 }

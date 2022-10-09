@@ -9,10 +9,9 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
 {
     public interface IUsuarioXUsuarioRepositorio
     {
-        public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId);
-
         public void agregarRelacion(UsuarioXusuario usuarioxusuario);
-
+        public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId);
         public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId);
+        public List<UsuarioXusuario> getPacienteXProfesionalActivos(int UsuarioLogeadoId);
     }
 }

@@ -12,19 +12,34 @@ namespace TPI_UNLAM_Backend.Servicios
     public class UsuarioXUsuarioServicio : IUsuarioXUsuarioServicio
     {
         private IUsuarioXUsuarioRepositorio _userXuser;
-
-        public UsuarioXUsuarioServicio(IUsuarioXUsuarioRepositorio userXuser)
+        private IAppSharedFunction _appSharedFunction;
+        private IUsuarioRepositorio _userRepo;
+        public UsuarioXUsuarioServicio(IUsuarioXUsuarioRepositorio userXuser, IAppSharedFunction appSharedFunction, IUsuarioRepositorio userRepo)
         {
             _userXuser = userXuser;
-        }
-        public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId)
-        {
-            return _userXuser.getPacienteXProfesionalInactivos(UsuarioLogeadoId).ToList();
+            _appSharedFunction = appSharedFunction;
+            _userRepo = userRepo;
         }
 
-        public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId)
+        public List<UsuarioXusuario> getPacienteXProfesional()
         {
-            return _userXuser.getPacienteXProfesional(UsuarioLogeadoId).ToList();
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+            return _userXuser.getPacienteXProfesional(usuario.Id).ToList();
+        }
+
+        public List<UsuarioXusuario> getPacienteXProfesionalActivos()
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+            return _userXuser.getPacienteXProfesionalActivos(usuario.Id).ToList();
+        }
+
+        public List<UsuarioXusuario> getPacienteXProfesionalInactivos()
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+            return _userXuser.getPacienteXProfesionalInactivos(usuario.Id).ToList();
         }
     }
 }

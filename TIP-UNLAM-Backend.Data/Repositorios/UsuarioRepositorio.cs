@@ -45,7 +45,27 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         public List<Usuario> getAllUsuariosProfesionalesInactivos()
         {
-            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional" ).ToList();
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional" && x.Activo == false).ToList();
+        }
+
+        public List<Usuario> getAllUsuariosProfesionales()
+        {
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Profesional").ToList();
+        }
+
+        public List<Usuario> getAllUsuariosPacientesActivos()
+        {
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Paciente" && x.Activo == true).ToList();
+        }
+
+        public List<Usuario> getAllUsuariosPacientesInactivos()
+        {
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Paciente" && x.Activo == false).ToList();
+        }
+
+        public List<Usuario> getAllUsuariosPacientes()
+        {
+            return _ctx.Usuarios.Where(x => x.TipoUsuario.Descripcion == "Paciente").ToList();
         }
     }
 }
