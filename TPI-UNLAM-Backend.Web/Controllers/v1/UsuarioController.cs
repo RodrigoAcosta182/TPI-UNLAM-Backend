@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Controllers.v1
 {
+    [ApiController]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioXUsuarioServicio _userService;
@@ -84,15 +86,15 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         }
 
         [HttpPost("api/v1/HabilitarProfesional")]
-        public void HabilitarProfesional(int id, bool estado)
+        public void HabilitarProfesional([FromBody] ProfesionalDto dto)
         {
-            _userServi.HabilitarProfesional(id, estado);
+            _userServi.HabilitarProfesional(dto.id, dto.estado);
         }
 
         [HttpPost("api/v1/HabilitaPacientePorProfesional")]
-        public void HabilitarPacienteXProfesional(int pacienteId, bool estado)
+        public void HabilitarPacienteXProfesional([FromBody] ProfesionalDto dto)
         {
-            _userService.HabilitarPacientes(pacienteId, estado);
+            _userService.HabilitarPacientes(dto.id, dto.estado);
         }
         #endregion
 
