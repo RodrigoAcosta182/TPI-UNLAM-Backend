@@ -88,6 +88,12 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         {
             _userServi.HabilitarProfesional(id, estado);
         }
+
+        [HttpPost("api/v1/HabilitaPacientePorProfesional")]
+        public void HabilitarPacienteXProfesional(int pacienteId, bool estado)
+        {
+            _userService.HabilitarPacientes(pacienteId, estado);
+        }
         #endregion
 
 

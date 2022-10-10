@@ -21,6 +21,31 @@ namespace TPI_UNLAM_Backend.Servicios
             _userRepo = userRepo;
         }
 
+
+        public void HabilitarPacientes(int pacienteId, bool estado)
+        {
+            Usuario user =_userRepo.getUsuarioById(pacienteId);
+
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+
+            UsuarioXusuario habilitarPaciente = _userXuser.HabilitarPacienteXProfesional(usuario.Id, pacienteId);
+
+            if (estado == false)
+            {
+                habilitarPaciente.Activo = true;
+                habilitarPaciente.FechaInicioRelacion = DateTime.Now;
+            }
+            else
+            {
+                habilitarPaciente.Activo = false;
+                habilitarPaciente.FechaFinalizacionRelacion = DateTime.Now;
+            }
+
+            _userXuser.SaveChanges();
+
+        }
+
         public List<UsuarioXusuario> getPacienteXProfesional()
         {
             string email = _appSharedFunction.GetUsuarioPorToken();

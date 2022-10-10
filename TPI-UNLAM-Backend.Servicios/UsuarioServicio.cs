@@ -70,7 +70,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 _userRepo.SaveChanges();
 
                 agregarRelacion(usuario);
-                _userXUsuarioRepo.SaveChanges();
+
                 return "El usuario se registro correctamente"; ;
             }
             catch (Exception)
@@ -110,7 +110,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 userxuser.Activo = false;
                 _userXUsuarioRepo.agregarRelacion(userxuser);
                 _userXUsuarioRepo.SaveChanges();
-                //_userRepo.SaveChanges();
+
             }
         }
 

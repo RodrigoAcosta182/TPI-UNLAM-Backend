@@ -21,7 +21,6 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         public void agregarUsuario([FromBody] UsuarioDto usuario)
         {
             _usuarioServicio.AgregarUsuario(usuario);
-            _usuarioServicio.agregarRelacion(usuario);
         }
 
 

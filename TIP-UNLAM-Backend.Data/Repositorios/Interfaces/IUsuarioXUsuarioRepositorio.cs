@@ -14,5 +14,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public List<UsuarioXusuario> getPacienteXProfesional(int UsuarioLogeadoId);
         public List<UsuarioXusuario> getPacienteXProfesionalInactivos(int UsuarioLogeadoId);
         public List<UsuarioXusuario> getPacienteXProfesionalActivos(int UsuarioLogeadoId);
+        public UsuarioXusuario HabilitarPacienteXProfesional(int UsuarioLogeadoId, int pacienteId);
     }
 }
