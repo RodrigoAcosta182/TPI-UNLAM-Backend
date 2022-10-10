@@ -31,7 +31,7 @@ namespace TPI_UNLAM_Backend.Servicios
 
             UsuarioXusuario habilitarPaciente = _userXuser.HabilitarPacienteXProfesional(usuario.Id, pacienteId);
 
-            if (estado == false)
+            if (estado == true)
             {
                 habilitarPaciente.Activo = true;
                 habilitarPaciente.FechaInicioRelacion = DateTime.Now;
