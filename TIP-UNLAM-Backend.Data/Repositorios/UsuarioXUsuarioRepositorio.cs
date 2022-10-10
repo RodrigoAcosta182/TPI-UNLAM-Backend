@@ -36,7 +36,10 @@ namespace TIP_UNLAM_Backend.Data
         {
             _ctx.Add(usuarioxusuario);
         }
-
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
+        }
 
 
 

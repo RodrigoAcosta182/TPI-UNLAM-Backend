@@ -58,6 +58,8 @@ namespace TPI_UNLAM_Backend.Servicios
                 {
                     userNuevo.TipoUsuarioId = 1;
                     userNuevo.NombreTutor = usuario.usuario.NombreTutor;
+
+                    usuario.usuario.TipoUsuarioId = userNuevo.TipoUsuarioId;
                 }
                 else
                 {
@@ -66,6 +68,9 @@ namespace TPI_UNLAM_Backend.Servicios
 
                 _userRepo.AgregarUsuario(userNuevo);
                 _userRepo.SaveChanges();
+
+                agregarRelacion(usuario);
+                _userXUsuarioRepo.SaveChanges();
                 return "El usuario se registro correctamente"; ;
             }
             catch (Exception)
@@ -104,7 +109,8 @@ namespace TPI_UNLAM_Backend.Servicios
                 userxuser.FechaFinalizacionRelacion = null;
                 userxuser.Activo = false;
                 _userXUsuarioRepo.agregarRelacion(userxuser);
-                _userRepo.SaveChanges();
+                _userXUsuarioRepo.SaveChanges();
+                //_userRepo.SaveChanges();
             }
         }
 
