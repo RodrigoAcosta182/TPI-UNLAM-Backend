@@ -149,7 +149,15 @@ namespace TPI_UNLAM_Backend.Servicios
         public string HabilitarProfesional(int id, bool estado)
         {
             Usuario profesinal = _userRepo.getUsuarioById(id);
-            profesinal.Activo = estado;
+            if (estado == false)
+            {
+                profesinal.Activo = true;
+            }
+            else
+            {
+                profesinal.Activo = false;
+            }
+            
 
             _userRepo.SaveChanges();
 
