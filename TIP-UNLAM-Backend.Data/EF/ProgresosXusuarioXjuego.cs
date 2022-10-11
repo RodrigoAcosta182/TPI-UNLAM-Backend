@@ -15,8 +15,10 @@ namespace TIP_UNLAM_Backend.Data.EF
         public bool Finalizado { get; set; }
         public int Aciertos { get; set; }
         public int Desaciertos { get; set; }
+        public int? ProfesionalId { get; set; }
 
         public virtual Juego Juego { get; set; }
+        public virtual Usuario Profesional { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

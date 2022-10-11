@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.SecurityTokenService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,10 @@ namespace TPI_UNLAM_Backend.Servicios
 
             UsuarioXusuario habilitarPaciente = _userXuser.HabilitarPacienteXProfesional(usuario.Id, pacienteId);
 
-            if (estado == true)
+            if (habilitarPaciente == null)
+                throw new BadRequestException("No se encuentro dicho paciente");
+
+            if (estado == false)
             {
                 habilitarPaciente.Activo = true;
                 habilitarPaciente.FechaInicioRelacion = DateTime.Now;
