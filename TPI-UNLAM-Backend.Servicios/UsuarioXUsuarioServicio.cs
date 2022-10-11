@@ -70,5 +70,12 @@ namespace TPI_UNLAM_Backend.Servicios
             Usuario usuario = _userRepo.getUsuarioByEmail(email);
             return _userXuser.getPacienteXProfesionalInactivos(usuario.Id).ToList();
         }
+
+        public UsuarioXusuario getProfesionalXPaciente(int UsuarioLogeadoId)
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+            return _userXuser.getProfesionalXPaciente(usuario.Id);
+        }
     }
 }

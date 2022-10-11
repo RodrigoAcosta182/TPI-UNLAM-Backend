@@ -12,7 +12,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public List<UsuarioXusuario> getPacienteXProfesional();
         public List<UsuarioXusuario> getPacienteXProfesionalInactivos();
         public List<UsuarioXusuario> getPacienteXProfesionalActivos();
-
+        public UsuarioXusuario getProfesionalXPaciente(int UsuarioLogeadoId);
         public void HabilitarPacientes(int pacienteId, bool estado);
     }
 }
