@@ -43,10 +43,6 @@ namespace TPI_UNLAM_Backend.Servicios
 
             Usuario usuarioLogueado = _userRepo.getUsuarioByEmail(emailUsuarioLogueado);
             UsuarioXusuario userPro = _userXuserRepo.getProfesionalXPaciente(usuarioLogueado.Id);
-
-            juego.FechaInicio = DateTime.Now;
-            juego.FechaFinalizacion = DateTime.Now;
-
             ProgresosXusuarioXjuego ProgresoObj = new ProgresosXusuarioXjuego();
 
             ProgresoObj.FechaFinalizacion = juego.FechaFinalizacion;
