@@ -10,6 +10,7 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
     public interface IProgresosXUsuarioXJuegoServicio
     {
         public List<ProgresosXusuarioXjuego> getAllProgresoXPaciente();
+        public List<ProgresosXusuarioXjuego> getAllProgresoXPacienteById(int id);
         public List<ProgresosXusuarioXjuego> getAllProgresoXProfesional();
         public ProgresosXusuarioXjuego getAllProgresoXPacienteXJuego(int juegoId);
         public ProgresosXusuarioXjuego getProgresoXPacienteXJuegoXProfesional(Usuario paciente, int juegoid);

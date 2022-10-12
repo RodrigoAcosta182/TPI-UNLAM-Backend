@@ -24,6 +24,12 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _progreso.getAllProgresoXPaciente();
         }
 
+        [HttpGet("api/v1/ListaProgresosXPacienteById/{id}")]
+        public ActionResult<List<ProgresosXusuarioXjuego>> getAllProgresoXPacienteById(int id)
+        {
+            return _progreso.getAllProgresoXPacienteById(id);
+        }
+
         [HttpGet("api/v1/ProgresosXPacienteXJuego")]
         public ActionResult<ProgresosXusuarioXjuego> getAllProgresoXPacienteXJuego(int juegoId)
         {

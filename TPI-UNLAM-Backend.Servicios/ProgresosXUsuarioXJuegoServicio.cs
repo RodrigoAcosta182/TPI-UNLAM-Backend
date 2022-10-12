@@ -32,7 +32,13 @@ namespace TPI_UNLAM_Backend.Servicios
 
             return _progresoRepo.getAllProgresoXPaciente(paciente);
         }
+        public List<ProgresosXusuarioXjuego> getAllProgresoXPacienteById(int id)
+        {
+            Usuario paciente = _userRepo.getUsuarioById(id);
 
+            return _progresoRepo.getAllProgresoXPaciente(paciente);
+        }
+        
         public ProgresosXusuarioXjuego getAllProgresoXPacienteXJuego(int juegoId)
         {
             string mailPacienteLogueado = _appSharedFunction.GetUsuarioPorToken();

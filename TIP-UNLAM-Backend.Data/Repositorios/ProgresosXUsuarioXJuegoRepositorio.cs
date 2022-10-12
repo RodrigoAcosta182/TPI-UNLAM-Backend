@@ -21,7 +21,6 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             return _ctx.ProgresosXusuarioXjuegos.Where(x => x.UsuarioId == paciente.Id).ToList();
         }
-
         public List<ProgresosXusuarioXjuego> getAllProgresoXProfesional(Usuario Profesional)
         {
             return _ctx.ProgresosXusuarioXjuegos.Where(x => x.ProfesionalId == Profesional.Id).ToList();
