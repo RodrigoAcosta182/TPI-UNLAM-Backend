@@ -52,13 +52,13 @@ namespace TIP_UNLAM_Backend.Data
                 where(profesional.Id == profesionalId)
                 select new vMisPacientes
                 {
-                    Id = paciente.Id,
+                    Id = s.Id,
                     NombreTutor = paciente.NombreTutor,
                     PacienteApellido = paciente.Apellido,
                     PacienteNombre = paciente.Nombre,
                     Mail = paciente.Mail,
                     Telefono = paciente.Telefono,
-                    Estado = paciente.Activo
+                    Estado = s.Activo
                 }
                 ).ToList();
         }
