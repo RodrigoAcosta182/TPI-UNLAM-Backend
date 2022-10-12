@@ -56,7 +56,7 @@ namespace TPI_UNLAM_Backend.Servicios
             ProgresoObj.Finalizado = juego.Finalizado;
             ProgresoObj.Aciertos = juego.Aciertos;
             ProgresoObj.Desaciertos = juego.Desaciertos;
-            ProgresoObj.ProfesionalId = userPro.Id;
+            ProgresoObj.ProfesionalId = userPro.UsuarioProfesionalId;
 
             _juegoRepo.FinalizarJuego(ProgresoObj);
             _juegoRepo.SaveChanges();
