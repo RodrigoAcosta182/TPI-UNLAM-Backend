@@ -33,16 +33,20 @@ namespace TPI_UNLAM_Backend.Servicios
 
             UsuarioXusuario habilitarPaciente = _userXuser.HabilitarPacienteXProfesional(usuario.Id, pacienteId);
 
-            if (habilitarPaciente == null)
+            Usuario paciente = _userRepo.getUsuarioById(pacienteId);
+
+            if (habilitarPaciente == null || paciente == null)
                 throw new BadRequestException("No se encuentro dicho paciente");
 
             if (estado == false)
             {
+                paciente.Activo = true;
                 habilitarPaciente.Activo = true;
                 habilitarPaciente.FechaInicioRelacion = DateTime.Now;
             }
             else
             {
+                paciente.Activo = false;
                 habilitarPaciente.Activo = false;
                 habilitarPaciente.FechaFinalizacionRelacion = DateTime.Now;
             }
