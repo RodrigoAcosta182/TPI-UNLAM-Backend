@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="EF\" />
     <Folder Include="ModeloEF\" />
+    <Folder Include="Procedure\" />
   </ItemGroup>
 
   <ItemGroup>

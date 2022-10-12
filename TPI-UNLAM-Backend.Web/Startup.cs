@@ -46,6 +46,9 @@ namespace TPI_UNLAM_Backend
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IUsuarioXUsuarioServicio, UsuarioXUsuarioServicio>();
             services.AddScoped<IUsuarioXUsuarioRepositorio, UsuarioXUsuarioRepositorio>();
+            services.AddScoped<IProgresosXUsuarioXJuegoRepositorio, ProgresosXUsuarioXJuegoRepositorio>();
+            services.AddScoped<IProgresosXUsuarioXJuegoServicio, ProgresosXUsuarioXJuegoServicio>();
+
             services.AddSingleton<IAppSharedFunction, AppSharedFunction>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

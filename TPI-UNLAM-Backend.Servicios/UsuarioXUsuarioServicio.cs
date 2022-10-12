@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.EF;
+using TIP_UNLAM_Backend.Data.Procedure;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
@@ -76,6 +77,13 @@ namespace TPI_UNLAM_Backend.Servicios
             string email = _appSharedFunction.GetUsuarioPorToken();
             Usuario usuario = _userRepo.getUsuarioByEmail(email);
             return _userXuser.getProfesionalXPaciente(usuario.Id);
+        }
+
+        public List<vMisPacientes> MisPacientes()
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+            return _userXuser.MisPacientes(usuario.Id);
         }
     }
 }

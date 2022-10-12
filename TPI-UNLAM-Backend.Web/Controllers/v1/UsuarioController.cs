@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TIP_UNLAM_Backend.Data.Dto;
 using TIP_UNLAM_Backend.Data.EF;
+using TIP_UNLAM_Backend.Data.Procedure;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Controllers.v1
@@ -75,6 +76,12 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         public ActionResult<List<Usuario>> getAllUsuariosPacientesInactivos()
         {
             return _userServi.getAllUsuariosProfesionalesInactivos();
+        }
+
+        [HttpGet("api/v1/spMisPacientes")]
+        public ActionResult<List<vMisPacientes>> vMisPacientes()
+        {
+            return _userService.MisPacientes();
         }
         #endregion
 

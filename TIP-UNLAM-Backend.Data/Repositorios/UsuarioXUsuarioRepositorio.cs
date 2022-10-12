@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.EF;
+using TIP_UNLAM_Backend.Data.Procedure;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
+using System.Data.SqlClient;
 
 namespace TIP_UNLAM_Backend.Data
 {
@@ -40,6 +42,25 @@ namespace TIP_UNLAM_Backend.Data
         {
             return _ctx.UsuarioXusuarios.Where(x => x.UsuarioPacienteId == UsuarioLogeadoId && x.Activo == true).FirstOrDefault();
         }
+
+        public List<vMisPacientes> MisPacientes(int profesionalId)
+        {
+            return (
+                from s in _ctx.UsuarioXusuarios
+                join paciente in _ctx.Usuarios on s.UsuarioPacienteId equals paciente.Id
+                join profesional in _ctx.Usuarios on s.UsuarioProfesionalId equals profesional.Id
+                where(profesional.Id == profesionalId)
+                select new vMisPacientes
+                {
+                    NombreTutor = paciente.NombreTutor,
+                    PacienteApellido = paciente.Apellido,
+                    PacienteNombre = paciente.Nombre,
+                    Mail = paciente.Mail,
+                    Telefono = paciente.Telefono
+                }
+                ).ToList();
+        }
+     
 
         public void agregarRelacion(UsuarioXusuario usuarioxusuario)
         {
