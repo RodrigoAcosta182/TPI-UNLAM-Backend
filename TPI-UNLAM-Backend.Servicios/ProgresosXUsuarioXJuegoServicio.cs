@@ -51,20 +51,20 @@ namespace TPI_UNLAM_Backend.Servicios
             return _progresoRepo.getAllProgresoXProfesional(profesional);
         }
 
-        public vProgresosXUsuarioXJuego getProgresoXPacienteXJuegoXProfesional(Usuario paciente, int juegoid)
+        public vProgresosXUsuarioXJuego getProgresoXPacienteXJuegoXProfesional(int pacienteId, int juegoid)
         {
             string mailProfesionalLogueado = _appSharedFunction.GetUsuarioPorToken();
 
             Usuario profesional = _userRepo.getUsuarioByEmail(mailProfesionalLogueado);
-            return _progresoRepo.getProgresoXPacienteXJuegoXProfesional(paciente, juegoid, profesional);
+            return _progresoRepo.getProgresoXPacienteXJuegoXProfesional(pacienteId, juegoid, profesional);
         }
 
-        public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(Usuario paciente)
+        public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(int pacienteId)
         {
             string mailProfesionalLogueado = _appSharedFunction.GetUsuarioPorToken();
 
             Usuario profesional = _userRepo.getUsuarioByEmail(mailProfesionalLogueado);
-            return _progresoRepo.getProgresoXProfesionalXPaciente(paciente, profesional);
+            return _progresoRepo.getProgresoXProfesionalXPaciente(pacienteId, profesional);
         }
 
         public void SaveChanges()

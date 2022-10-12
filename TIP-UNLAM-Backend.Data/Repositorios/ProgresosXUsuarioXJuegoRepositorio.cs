@@ -92,14 +92,14 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         }
 
-        public vProgresosXUsuarioXJuego getProgresoXPacienteXJuegoXProfesional(Usuario paciente, int juegoId, Usuario profesional)
+        public vProgresosXUsuarioXJuego getProgresoXPacienteXJuegoXProfesional(int pacienteId, int juegoId, Usuario profesional)
         {
             return (
           from s in _ctx.ProgresosXusuarioXjuegos
           join j in _ctx.Juegos on s.JuegoId equals j.Id
           join p1 in _ctx.Usuarios on s.UsuarioId equals p1.Id
           join p2 in _ctx.Usuarios on s.ProfesionalId equals p2.Id
-          where (s.UsuarioId == paciente.Id && s.JuegoId == juegoId && s.ProfesionalId == profesional.Id)
+          where (s.UsuarioId == pacienteId && s.JuegoId == juegoId && s.ProfesionalId == profesional.Id)
           select new vProgresosXUsuarioXJuego
           {
               PacienteApellido = p1.Apellido,
@@ -117,14 +117,14 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         }
 
-        public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(Usuario paciente, Usuario profesional)
+        public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(int pacienteId, Usuario profesional)
         {
             return (
          from s in _ctx.ProgresosXusuarioXjuegos
          join j in _ctx.Juegos on s.JuegoId equals j.Id
          join p1 in _ctx.Usuarios on s.UsuarioId equals p1.Id
          join p2 in _ctx.Usuarios on s.ProfesionalId equals p2.Id
-         where (s.UsuarioId == paciente.Id && s.ProfesionalId == profesional.Id)
+         where (s.UsuarioId == pacienteId && s.ProfesionalId == profesional.Id)
          select new vProgresosXUsuarioXJuego
          {
              PacienteApellido = p1.Apellido,
