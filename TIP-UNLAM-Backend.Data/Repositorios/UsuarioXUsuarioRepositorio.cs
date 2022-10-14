@@ -53,6 +53,7 @@ namespace TIP_UNLAM_Backend.Data
                 select new vMisPacientes
                 {
                     Id = s.Id,
+                    PacienteId = s.UsuarioPacienteId,
                     NombreTutor = paciente.NombreTutor,
                     PacienteApellido = paciente.Apellido,
                     PacienteNombre = paciente.Nombre,

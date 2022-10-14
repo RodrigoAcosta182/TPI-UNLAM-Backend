@@ -9,6 +9,7 @@ namespace TIP_UNLAM_Backend.Data.Procedure
     public class vMisPacientes
     {
         public int Id { get; set; }
+        public int PacienteId { get; set; }
         public string PacienteNombre { get; set; }
         public string PacienteApellido { get; set; }
         public string NombreTutor { get; set; }
