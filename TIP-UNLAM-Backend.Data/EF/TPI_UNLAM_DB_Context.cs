@@ -20,6 +20,7 @@ namespace TIP_UNLAM_Backend.Data.EF
 
         public virtual DbSet<Colore> Colores { get; set; }
         public virtual DbSet<Juego> Juegos { get; set; }
+        public virtual DbSet<Nota> Notas { get; set; }
         public virtual DbSet<ProgresosXusuarioXjuego> ProgresosXusuarioXjuegos { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
@@ -74,6 +75,29 @@ namespace TIP_UNLAM_Backend.Data.EF
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Nota>(entity =>
+            {
+                entity.Property(e => e.Fecha).HasColumnType("datetime");
+
+                entity.Property(e => e.Memo)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PacienteId).HasColumnName("Paciente_Id");
+
+                entity.Property(e => e.ProfesionalId).HasColumnName("Profesional_Id");
+
+                entity.HasOne(d => d.Paciente)
+                    .WithMany(p => p.NotaPacientes)
+                    .HasForeignKey(d => d.PacienteId)
+                    .HasConstraintName("FK_PacienteId_Notas");
+
+                entity.HasOne(d => d.Profesional)
+                    .WithMany(p => p.NotaProfesionals)
+                    .HasForeignKey(d => d.ProfesionalId)
+                    .HasConstraintName("FK_ProfesionalId_Notas");
             });
 
             modelBuilder.Entity<ProgresosXusuarioXjuego>(entity =>
