@@ -1,8 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>TPI_UNLAM_Backend.Utils</RootNamespace>
-  </PropertyGroup>
-
-</Project>
