@@ -18,6 +18,8 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public void GuardarNota([FromBody] Nota nota);
         public List<Nota> GetAllNotasXProfesional();
         public Nota getNotaXLlamado(int llamadaId);
+        public List<Nota> getAllNotasArchivadas();
+        public string ArchivarNota(int id);
         //public void guardarSugerencia(Sugerencia sugerencia);
     }
 }

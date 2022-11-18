@@ -79,6 +79,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 throw new BadRequestException("Los campos no pueden ser nulos");
 
             nota.LlamadaId = null;
+            nota.Archivado = false;
 
             _notaRepositorio.GuardarNota(nota);
             _notaRepositorio.SaveChanges();
@@ -87,6 +88,29 @@ namespace TPI_UNLAM_Backend.Servicios
         public Nota getNotaXLlamado(int llamadaId)
         {
             return _notaRepositorio.getNotaXLlamado(llamadaId);
+        }
+
+        public string ArchivarNota(int id)
+        {
+            Nota nota = _notaRepositorio.getNotaById(id);
+            if (nota.Archivado == false)
+            {
+                nota.Archivado = true;
+            }
+            else
+            {
+                nota.Archivado = false;
+            }
+
+            _notaRepositorio.SaveChanges();
+
+            return string.Format("La nota {0} se ha archivado correctamente", nota.Id);
+
+        }
+
+        public List<Nota> getAllNotasArchivadas()
+        {
+            return _notaRepositorio.getAllNotasArchivadas();
         }
 
         public void SaveChanges()
