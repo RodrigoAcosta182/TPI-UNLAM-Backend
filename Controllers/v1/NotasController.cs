@@ -22,6 +22,11 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         //{
         //    _notasServicio.guardarSugerencia(sugerencia);
         //}
+        [HttpPost("api/v1/ArchivarNota")]
+        public void ArchivarNota(int id)
+        {
+            _notasServicio.ArchivarNota(id);
+        }
         [HttpPost("api/v1/GuardarNotaEnLlamada")]
         public void GuardarNotaEnLlamada([FromBody] Nota nota, string codigoLLamado)
         {
@@ -36,6 +41,11 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         public ActionResult<List<Nota>> GetAllNotasXPacienteXProfesional(int idPaciente)
         {
             return _notasServicio.GetAllNotasXPacienteXProfesional(idPaciente);
+        }
+        [HttpGet("api/v1/GetAllNotasArchivadas")]
+        public ActionResult<List<Nota>> GetAllNotasArchivadas()
+        {
+            return _notasServicio.getAllNotasArchivadas();
         }
     }
 }
