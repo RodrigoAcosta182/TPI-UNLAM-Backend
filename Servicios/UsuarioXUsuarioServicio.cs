@@ -64,6 +64,16 @@ namespace TPI_UNLAM_Backend.Servicios
             return _userXuser.getPacienteXProfesional(usuario.Id).ToList();
         }
 
+        public Usuario getProfesionalXPaciente()
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario usuario = _userRepo.getUsuarioByEmail(email);
+
+            UsuarioXusuario profesional = _userXuser.getProfesionalXPaciente(usuario.Id);
+            
+            return _userRepo.getUsuarioById(profesional.UsuarioProfesionalId);
+        }
+
         public List<vMisPacientes> MisPacientes()
         {
             string email = _appSharedFunction.GetUsuarioPorToken();

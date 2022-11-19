@@ -47,6 +47,10 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
         {
             return _ctx.Notas.Where(x => x.ProfesionalId == usuario.Id).ToList();
         }
+        public List<Nota> getAllNotasArchivadas()
+        {
+            return _ctx.Notas.Where(x => x.Archivado == true).ToList();
+        }
         public void SaveChanges()
         {
             _ctx.SaveChanges();
