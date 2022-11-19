@@ -32,6 +32,13 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _userServi.getUsuarioById(id);
         }
 
+        [HttpGet("api/v1/ProfesionalXPaciente")]
+        public Usuario getProfesionalXPaciente()
+        {
+            return _userService.getProfesionalXPaciente();
+        }
+        //public Usuario getProfesionalXPaciente()
+
         [HttpGet("api/v1/ObtenerTodosLosProfesionales")]
         public ActionResult<List<Usuario>> getAllProfesionales()
         {

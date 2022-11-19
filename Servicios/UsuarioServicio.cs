@@ -216,6 +216,8 @@ namespace TPI_UNLAM_Backend.Servicios
 
         #region Get
 
+    
+
         public List<Usuario> getAllUsuariosProfesionales()
         {
             return _userRepo.getAllUsuariosProfesionales();
