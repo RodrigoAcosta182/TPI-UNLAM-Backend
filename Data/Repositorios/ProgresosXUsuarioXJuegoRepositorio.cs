@@ -95,6 +95,23 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         }
 
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteId, int juegoId)
+        {
+            return (
+           from s in _ctx.ProgresosXusuarioXjuegos
+           join j in _ctx.Juegos on s.JuegoId equals j.Id
+           join p1 in _ctx.Usuarios on s.UsuarioId equals p1.Id
+           join p2 in _ctx.Usuarios on s.ProfesionalId equals p2.Id
+           where (s.UsuarioId != pacienteId && s.JuegoId == juegoId)
+           select new vProgresosXUsuarioXJuego
+           {
+               Aciertos = s.Aciertos,
+               Desaciertos = s.Desaciertos
+           }
+           ).ToList();
+
+        }
+
         public List<vProgresosXUsuarioXJuego> getProgresoXPacienteXJuegoXProfesional(int pacienteId, int juegoId, Usuario profesional)
         {
             return (

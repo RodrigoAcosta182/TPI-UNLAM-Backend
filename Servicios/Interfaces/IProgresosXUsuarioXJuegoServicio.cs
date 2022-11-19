@@ -14,8 +14,8 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public List<vProgresosXUsuarioXJuego> getAllProgresoXProfesional();
         public vProgresosXUsuarioXJuego getAllProgresoXPacienteXJuego(int juegoId);
         public List<vProgresosXUsuarioXJuego> getProgresoXPacienteXJuegoXProfesional(int pacienteId, int juegoid);
-
         public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(int pacienteId);
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteid, int juegoId);
         public void SaveChanges();
     }
 }

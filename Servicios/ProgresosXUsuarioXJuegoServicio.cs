@@ -73,5 +73,11 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             _progresoRepo.SaveChanges();
         }
+
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteid, int juegoId)
+        {
+            return _progresoRepo.getAllProgresoXJuego(pacienteid, juegoId);
+        }
+
     }
 }

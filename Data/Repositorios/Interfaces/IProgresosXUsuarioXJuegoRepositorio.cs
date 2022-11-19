@@ -15,6 +15,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios.Interfaces
         public vProgresosXUsuarioXJuego getAllProgresoXPacienteXJuego(Usuario paciente, int juegoId);
         public List<vProgresosXUsuarioXJuego> getProgresoXPacienteXJuegoXProfesional(int pacienteId, int juegoId, Usuario profesional);
         public List<vProgresosXUsuarioXJuego> getProgresoXProfesionalXPaciente(int pacienteId, Usuario profesional);
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteId, int juegoId);
         public void SaveChanges();
     }
 }

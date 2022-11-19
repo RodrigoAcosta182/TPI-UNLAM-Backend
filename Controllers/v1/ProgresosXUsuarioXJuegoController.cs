@@ -50,21 +50,11 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _progreso.getProgresoXProfesionalXPaciente(pacienteId);
         }
 
-        //public FileResult GeneratePdf(string html)
-        //{
-        //    html = html.Replace("strtTag", "<").Replace("EndTag", ">");
-
-        //    HtmlToPdf oHtmlToPdf = new HtmlToPdf();
-        //    PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
-        //    byte[] pdf = oPdfDocument.Save();
-        //    oPdfDocument.Close();
-
-        //    return File(
-        //        pdf,
-        //        "application/pdf",
-        //        "StudentList.pdf"
-        //        );
-        //}
+        [HttpGet("api/v1/ProgresoXJuego/{pacienteId}/{juegoid}")]
+        public ActionResult<List<vProgresosXUsuarioXJuego>> getAllProgresoXJuego(int pacienteId, int juegoid)
+        {
+            return _progreso.getAllProgresoXJuego(pacienteId,juegoid);
+        }
 
     }
 }
