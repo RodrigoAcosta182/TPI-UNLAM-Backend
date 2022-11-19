@@ -26,7 +26,7 @@ namespace TPI_UNLAM_Backend
 {
     public class Startup
     {
-        private readonly string _myCors = "MyCors";
+
 
         public Startup(IConfiguration configuration)
         {
@@ -111,7 +111,7 @@ namespace TPI_UNLAM_Backend
 
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                    builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://grandinweb20221115023942.azurewebsites.net")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -133,8 +133,6 @@ namespace TPI_UNLAM_Backend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TPI_UNLAM_Backend v1"));
                 app.UseExceptionHandler("/error-local-development");
             }
             else
@@ -146,10 +144,12 @@ namespace TPI_UNLAM_Backend
             app.UseCors();
             app.UseHttpsRedirection();
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TPI_UNLAM_Backend v1"));
             app.UseAuthentication();
             app.UseWebSockets();
+            
 
             app.UseEndpoints(endpoints =>
             {
