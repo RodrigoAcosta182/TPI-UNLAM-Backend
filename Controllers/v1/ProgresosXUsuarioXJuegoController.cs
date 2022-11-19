@@ -26,8 +26,8 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _progreso.getAllProgresoXPaciente();
         }
 
-        [HttpGet("api/v1/ProgresosXPacienteXJuego")]
-        public ActionResult<vProgresosXUsuarioXJuego> getAllProgresoXPacienteXJuego(int juegoId)
+        [HttpGet("api/v1/ProgresosXPacienteXJuego/{juegoid}")]
+        public ActionResult<List<vProgresosXUsuarioXJuego>> getAllProgresoXPacienteXJuego(int juegoId)
         {
             return _progreso.getAllProgresoXPacienteXJuego(juegoId);
         }

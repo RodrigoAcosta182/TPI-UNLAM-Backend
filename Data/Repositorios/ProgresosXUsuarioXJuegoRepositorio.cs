@@ -69,7 +69,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         }
 
-        public vProgresosXUsuarioXJuego getAllProgresoXPacienteXJuego(Usuario paciente, int juegoId)
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXPacienteXJuego(Usuario paciente, int juegoId)
         {
             return (
            from s in _ctx.ProgresosXusuarioXjuegos
@@ -91,7 +91,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
                Finalizado = s.Finalizado,
                Duracion = String.Format("{0:00}:{1:00}:{2:00}", s.FechaFinalizacion.Subtract(s.FechaInicio).Hours, s.FechaFinalizacion.Subtract(s.FechaInicio).Minutes, s.FechaFinalizacion.Subtract(s.FechaInicio).Seconds)
            }
-           ).FirstOrDefault();
+           ).ToList();
 
         }
 
