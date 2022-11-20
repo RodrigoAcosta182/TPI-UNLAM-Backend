@@ -4,7 +4,7 @@
     {
         public bool online { get; set; }
         public string emailProfesional { get; set; }
-        public string emailPaciente { get; set; }
+        public UsuarioDto paciente { get; set; }
 
 
     }
