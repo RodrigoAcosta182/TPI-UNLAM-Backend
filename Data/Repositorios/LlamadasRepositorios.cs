@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.Dto;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 
 namespace TIP_UNLAM_Backend.Data.Repositorios

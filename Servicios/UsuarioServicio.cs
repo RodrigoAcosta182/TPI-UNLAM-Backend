@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 using TIP_UNLAM_Backend.Data.Dto;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 using TPI_UNLAM_Backend.Exceptions;

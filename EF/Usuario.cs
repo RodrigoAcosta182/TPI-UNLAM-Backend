@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace TIP_UNLAM_Backend.Data.EF
+namespace Grandin.Web.EF
 {
     public partial class Usuario
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TIP_UNLAM_Backend.Data.Dto;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
 namespace TPI_UNLAM_Backend.Controllers.v1
@@ -17,11 +17,6 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _notasServicio = notasServicio;
         }
 
-        //[HttpPost("api/v1/guardarSugerencia")]
-        //public void guardarSugerencia([FromBody] Sugerencia sugerencia)
-        //{
-        //    _notasServicio.guardarSugerencia(sugerencia);
-        //}
         [HttpPost("api/v1/ArchivarNota")]
         public void ArchivarNota(int id)
         {

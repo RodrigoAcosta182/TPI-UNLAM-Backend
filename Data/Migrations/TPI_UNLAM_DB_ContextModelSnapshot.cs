@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 
 namespace TIP_UNLAM_Backend.Data.Migrations
 {

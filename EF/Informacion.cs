@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace TIP_UNLAM_Backend.Data.EF
+namespace Grandin.Web.EF
 {
-    public partial class Colore
+    public partial class Informacion
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public string Hexadecimal { get; set; }
+        public string Mensaje { get; set; }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Grandin.Web.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.Dto;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 
 namespace TIP_UNLAM_Backend.Data.Repositorios
@@ -69,7 +70,7 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
 
         }
 
-        public vProgresosXUsuarioXJuego getAllProgresoXPacienteXJuego(Usuario paciente, int juegoId)
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXPacienteXJuego(Usuario paciente, int juegoId)
         {
             return (
            from s in _ctx.ProgresosXusuarioXjuegos
@@ -91,7 +92,24 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
                Finalizado = s.Finalizado,
                Duracion = String.Format("{0:00}:{1:00}:{2:00}", s.FechaFinalizacion.Subtract(s.FechaInicio).Hours, s.FechaFinalizacion.Subtract(s.FechaInicio).Minutes, s.FechaFinalizacion.Subtract(s.FechaInicio).Seconds)
            }
-           ).FirstOrDefault();
+           ).ToList();
+
+        }
+
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteId, int juegoId)
+        {
+            return (
+           from s in _ctx.ProgresosXusuarioXjuegos
+           join j in _ctx.Juegos on s.JuegoId equals j.Id
+           join p1 in _ctx.Usuarios on s.UsuarioId equals p1.Id
+           join p2 in _ctx.Usuarios on s.ProfesionalId equals p2.Id
+           where (s.UsuarioId != pacienteId && s.JuegoId == juegoId)
+           select new vProgresosXUsuarioXJuego
+           {
+               Aciertos = s.Aciertos,
+               Desaciertos = s.Desaciertos
+           }
+           ).ToList();
 
         }
 

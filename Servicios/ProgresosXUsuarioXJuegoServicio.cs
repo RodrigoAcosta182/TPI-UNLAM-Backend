@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TIP_UNLAM_Backend.Data.Dto;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Servicios.Interfaces;
 
@@ -42,7 +42,7 @@ namespace TPI_UNLAM_Backend.Servicios
             return _progresoRepo.getAllProgresoXProfesional(profesional);
         }
 
-        public vProgresosXUsuarioXJuego getAllProgresoXPacienteXJuego(int juegoId)
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXPacienteXJuego(int juegoId)
         {
             string mailPacienteLogueado = _appSharedFunction.GetUsuarioPorToken();
 
@@ -73,5 +73,11 @@ namespace TPI_UNLAM_Backend.Servicios
         {
             _progresoRepo.SaveChanges();
         }
+
+        public List<vProgresosXUsuarioXJuego> getAllProgresoXJuego(int pacienteid, int juegoId)
+        {
+            return _progresoRepo.getAllProgresoXJuego(pacienteid, juegoId);
+        }
+
     }
 }

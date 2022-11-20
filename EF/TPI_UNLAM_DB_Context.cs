@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
-namespace TIP_UNLAM_Backend.Data.EF
+namespace Grandin.Web.EF
 {
     public partial class TPI_UNLAM_DB_Context : DbContext
     {
@@ -22,6 +22,7 @@ namespace TIP_UNLAM_Backend.Data.EF
 
         public virtual DbSet<Colore> Colores { get; set; }
         public virtual DbSet<Genero> Generos { get; set; }
+        public virtual DbSet<Informacion> Informacions { get; set; }
         public virtual DbSet<Juego> Juegos { get; set; }
         public virtual DbSet<Llamadum> Llamada { get; set; }
         public virtual DbSet<Nota> Notas { get; set; }
@@ -63,6 +64,19 @@ namespace TIP_UNLAM_Backend.Data.EF
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Informacion>(entity =>
+            {
+                entity.ToTable("Informacion");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Mensaje)
+                    .HasMaxLength(2000)
                     .IsUnicode(false);
             });
 

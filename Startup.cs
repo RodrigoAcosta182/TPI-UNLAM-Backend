@@ -13,7 +13,7 @@ using System;
 using System.Linq;
 using System.Text;
 using TIP_UNLAM_Backend.Data;
-using TIP_UNLAM_Backend.Data.EF;
+using Grandin.Web.EF;
 using TIP_UNLAM_Backend.Data.Repositorios;
 using TIP_UNLAM_Backend.Data.Repositorios.Interfaces;
 using TPI_UNLAM_Backend.Exceptions;
