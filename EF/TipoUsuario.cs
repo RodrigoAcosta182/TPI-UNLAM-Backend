@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace TIP_UNLAM_Backend.Data.EF
+namespace Grandin.Web.EF
 {
-    public partial class Genero
+    public partial class TipoUsuario
     {
-        public Genero()
+        public TipoUsuario()
         {
             Usuarios = new HashSet<Usuario>();
         }
