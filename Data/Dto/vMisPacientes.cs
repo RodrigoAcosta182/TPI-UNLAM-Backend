@@ -20,5 +20,6 @@ namespace TIP_UNLAM_Backend.Data.Procedure
         public string Telefono { get; set; }
         public string Mail { get; set; }
         public bool Estado { get; set; }
+        public bool Online { get; set; }
     }
 }

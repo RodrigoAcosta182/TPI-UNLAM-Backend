@@ -62,7 +62,8 @@ namespace TIP_UNLAM_Backend.Data
                     FechaFinRelac = s.FechaFinalizacionRelacion,
                     Mail = paciente.Mail,
                     Telefono = paciente.Telefono,
-                    Estado = s.Activo
+                    Estado = s.Activo,
+                    Online = paciente.OnLine.Value
                 }
                 ).ToList();
         }
