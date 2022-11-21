@@ -32,6 +32,18 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             return _userServi.getUsuarioById(id);
         }
 
+        [HttpGet("api/v1/ObtenerEnLineaByUsuario")]
+        public bool getUsuarioOnlineByUsuario(int userId)
+        {
+            return _userServi.getUsuarioOnlineByUsuario(userId);
+        }
+
+        [HttpGet("api/v1/ObtenerEnLineaByUsuarioLogueado")]
+        public bool getUsuarioOnlineByUsuarioLogueado()
+        {
+            return _userServi.getUsuarioOnlineByUsuarioLogueado();
+        }
+
         [HttpGet("api/v1/ProfesionalXPaciente")]
         public Usuario getProfesionalXPaciente()
         {
@@ -69,6 +81,18 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         public void HabilitarProfesional([FromBody] ProfesionalDto dto)
         {
             _userServi.HabilitarProfesional(dto.id, dto.estado);
+        }
+
+        [HttpPost("api/v1/SetearEnLineaByUsuario")]
+        public void SetearOnlineByUsuario([FromBody] UsuarioOnLineDTO usuarioOnLineDTO)
+        {
+            _userServi.SetearOnlineByUsuario(usuarioOnLineDTO);
+        }
+
+        [HttpPost("api/v1/SetearEnLineaByUsuarioLogueado")]
+        public void SetearOnlineByUsuarioLogueado([FromBody] bool online)
+        {
+            _userServi.SetearOnlineByUsuarioLogeado(online);
         }
 
         [HttpPost("api/v1/HabilitaPacientePorProfesional")]
