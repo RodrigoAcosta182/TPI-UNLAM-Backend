@@ -17,7 +17,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
             _notasServicio = notasServicio;
         }
 
-        [HttpPost("api/v1/ArchivarNota")]
+        [HttpPost("api/v1/ArchivarNota/{id}")]
         public void ArchivarNota(int id)
         {
             _notasServicio.ArchivarNota(id);

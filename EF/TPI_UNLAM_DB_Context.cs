@@ -229,6 +229,8 @@ namespace Grandin.Web.EF
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.OnLine).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Telefono)
                     .HasMaxLength(50)
                     .IsUnicode(false);

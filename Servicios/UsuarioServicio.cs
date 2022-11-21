@@ -53,6 +53,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 userNuevo.Dni = usuario.usuario.Dni;
                 userNuevo.Telefono = usuario.usuario.Telefono;
                 userNuevo.GeneroId = usuario.usuario.GeneroId;
+                userNuevo.OnLine = false;
                 if (String.IsNullOrEmpty(usuario.usuario.Matricula))
                 {
                     userNuevo.TipoUsuarioId = 1;
@@ -113,6 +114,37 @@ namespace TPI_UNLAM_Backend.Servicios
                 _userXUsuarioRepo.SaveChanges();
 
             }
+        }
+
+        public bool SetearOnlineByUsuario (UsuarioOnLineDTO usuarioOnLineDTO)
+        {
+            Usuario user = _userRepo.getUsuarioById(usuarioOnLineDTO.userId);
+            if (user == null)
+                throw new BadRequestException("El usuario no existe");
+
+            if (usuarioOnLineDTO.OnLine == null)
+                throw new BadRequestException("No Existe estado");
+
+            user.OnLine = usuarioOnLineDTO.OnLine;
+            _userRepo.SaveChanges();
+            return usuarioOnLineDTO.OnLine;
+            
+        } 
+        public bool SetearOnlineByUsuarioLogeado (bool online)
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario user = _userRepo.getUsuarioByEmail(email);
+
+            if (user == null)
+                throw new BadRequestException("El usuario no existe");
+
+            if (online == null)
+                throw new BadRequestException("No Existe estado");
+
+            user.OnLine = online;
+            _userRepo.SaveChanges();
+            return online;
+            
         }
 
         public UsuarioDto Login(LoginDto loginDto)
@@ -216,7 +248,29 @@ namespace TPI_UNLAM_Backend.Servicios
 
         #region Get
 
-    
+        public bool getUsuarioOnlineByUsuario(int userid)
+        {
+            if (userid == null || userid == 0)
+                throw new BadRequestException("Faltan datos");
+
+           Usuario user =  _userRepo.getUsuarioById(userid);
+
+            if (user == null)
+                throw new BadRequestException("No existe el usuario");
+
+            return (bool)user.OnLine;
+        }
+
+        public bool getUsuarioOnlineByUsuarioLogueado()
+        {
+            string email = _appSharedFunction.GetUsuarioPorToken();
+            Usuario user = _userRepo.getUsuarioByEmail(email);
+
+            if (user == null)
+                throw new BadRequestException("No existe el usuario");
+
+            return (bool)user.OnLine;
+        }
 
         public List<Usuario> getAllUsuariosProfesionales()
         {

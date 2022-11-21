@@ -18,6 +18,10 @@ namespace TPI_UNLAM_Backend.Servicios.Interfaces
         public void modificarUsuario(Usuario usuario);
         public void agregarRelacion(UsuarioDto usuario);
         public string HabilitarProfesional(int id, bool estado);
+        public bool SetearOnlineByUsuario(UsuarioOnLineDTO user);
+        public bool SetearOnlineByUsuarioLogeado(bool online);
+        public bool getUsuarioOnlineByUsuario(int userid);
+        public bool getUsuarioOnlineByUsuarioLogueado();
         public List<Usuario> getAllUsuariosProfesionalesActivos();
         public List<Usuario> getAllUsuariosProfesionalesInactivos();
         public List<Usuario> getAllUsuariosProfesionales();
