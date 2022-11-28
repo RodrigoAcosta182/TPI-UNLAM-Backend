@@ -44,6 +44,8 @@ namespace TPI_UNLAM_Backend.Servicios
                 habilitarPaciente.Activo = true;
                 habilitarPaciente.Pendiente = false;
                 habilitarPaciente.FechaInicioRelacion = DateTime.Now;
+                if (habilitarPaciente.FechaFinalizacionRelacion != null)
+                    habilitarPaciente.FechaFinalizacionRelacion = null;
             }
             else
             {
