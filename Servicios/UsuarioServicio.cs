@@ -220,8 +220,6 @@ namespace TPI_UNLAM_Backend.Servicios
             Regex letras = new Regex(@"[a-zA-z]");
             //digitos del 0 al 9
             Regex numeros = new Regex(@"[0-9]");
-            //cualquier caracter del conjunto
-            Regex caracEsp = new Regex("[!\"#\\$%&'()*+,-./:;=?@\\[\\]^_`{|}~]");
 
             Boolean cumpleCriterios = false;
 
@@ -231,14 +229,6 @@ namespace TPI_UNLAM_Backend.Servicios
 
             //si no contiene los numeros, regresa false
             if (!numeros.IsMatch(contraseñaSinVerificar))
-                return false;
-
-            //si no contiene los caracteres especiales, regresa false
-            if (!caracEsp.IsMatch(contraseñaSinVerificar))
-                return false;
-
-            //Si la contraseña tiene menos de 8 caracteres, regresa false
-            if (contraseñaSinVerificar.Length < 8)
                 return false;
 
             //si cumple con todo, regresa true
