@@ -21,5 +21,6 @@ namespace TIP_UNLAM_Backend.Data.Procedure
         public string Mail { get; set; }
         public bool Estado { get; set; }
         public bool Online { get; set; }
+        public string PacienteNombreCompleto { get; set; }
     }
 }

@@ -63,7 +63,8 @@ namespace TIP_UNLAM_Backend.Data
                     Mail = paciente.Mail,
                     Telefono = paciente.Telefono,
                     Estado = s.Activo,
-                    Online = paciente.OnLine.Value
+                    Online = paciente.OnLine.Value,
+                    PacienteNombreCompleto = paciente.Nombre + ' ' + paciente.Apellido
                 }
                 ).ToList();
         }
