@@ -107,7 +107,8 @@ namespace TIP_UNLAM_Backend.Data.Repositorios
            select new vProgresosXUsuarioXJuego
            {
                Aciertos = s.Aciertos,
-               Desaciertos = s.Desaciertos
+               Desaciertos = s.Desaciertos,
+               FechaInicio = s.FechaInicio
            }
            ).ToList();
 
