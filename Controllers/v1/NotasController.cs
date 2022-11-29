@@ -27,7 +27,7 @@ namespace TPI_UNLAM_Backend.Controllers.v1
         {
             _notasServicio.GuardarNotaEnLlamada(nota, codigoLLamado);
         }
-        [HttpPost("api/v1/EliminarNota/{id}")]
+        [HttpPost("api/v1/EliminarNota/{notaId}")]
         public void EliminarNota(int notaId)
         {
             _notasServicio.EliminarNota(notaId);
