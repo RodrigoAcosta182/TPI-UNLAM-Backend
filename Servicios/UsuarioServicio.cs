@@ -64,6 +64,7 @@ namespace TPI_UNLAM_Backend.Servicios
                 }
                 else
                 {
+                    userNuevo.Matricula = usuario.usuario.Matricula;
                     userNuevo.TipoUsuarioId = 2;
                     usuario.usuario.TipoUsuarioId = 2;
                 }
